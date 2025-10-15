@@ -35,21 +35,16 @@ public class Usuario {
       id = sc.next();
     }
 
-    System.out.println("Listo, nuevo usuario creado!")
+    this.librosPrestados = new ArrayList<>();
+
+    System.out.println("Listo, nuevo usuario creado!");
   }
 
   // Metodo para tomar libros prestados
-  public boolean tomarPrestado (Libro libro) {
-    // Verificamos la disponibilidad del libro
-    if (!libro.estaDisponible()) {
-      System.out.println("Ese libro no se encuentra disponible en este momento!");
-      return false;
-    }
-
-    // En caso este disponible, lo marcamos como ocupado y lo tomamos prestado
+  public void tomarPrestado (Libro libro) {
     this.librosPrestados.add(libro);
     libro.setDisponible(false);
-    return true;
+    return;
   }
 
   // Metodo para verificar que el usuario tenga posesión de un libro
@@ -66,13 +61,7 @@ public class Usuario {
   }
 
   // Metodo para devolver un libro
-  public boolean devolver(Libro libro) {
-    // Verificamos que el usuario este en posesión de dicho libro
-    if (!tiene(libro)) {
-      System.out.println("Ese libro no se encuentra en posesión de " + usuario);
-    }
-
-    // Si se lego a este punto, significa que si tiene el libro y por lo tanto, lo removemos de su lista de libros y marcamos el libro como disponible
+  public void devolver(Libro libro) {
     this.librosPrestados.remove(libro);
     libro.setDisponible(true);
   }
@@ -108,10 +97,7 @@ public class Usuario {
 
   @Override
   // Metodo toString 
-  public void toString() {
-    System.out.println("Usuario: " + this.nombre + "\nId: " + this.id + "Libros en su posesión: ");
-    for (Libro libro : this.librosPrestados) {
-      System.out.println(libro.getTitulo());
-    }
+  public String toString() {
+    return "Usuario: " + this.nombre + "\nId: " + this.id + "Libros en su posesión: " + librosPrestados;
   }
 }
