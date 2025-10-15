@@ -71,4 +71,16 @@ public class Usuario {
     this.id = id;
     return true;
   }
+
+  public String getNombre() {
+    return this.nombre;
+  }
+
+  public String getId() {
+    return this.id;
+  }
+
+  public ArrayList<libro> getLibrosPrestados() {
+    return this.librosPrestados;
+  }
 }
