@@ -1,4 +1,5 @@
 import java.util.*;
+import java.time.LocalDate;
 
 public class Biblioteca {
 
@@ -14,7 +15,7 @@ public class Biblioteca {
         this.prestamos = new ArrayList<>();
     }
 
-    //Metodo que agrega libros
+    //Metodo que agrega libros  
     public ArrayList<Libro> agregarLibro(){
 
         Libro nuevoLibro = new Libro();
@@ -109,7 +110,8 @@ public class Biblioteca {
             }
 
         usuario.tomarPrestado(libro);
-        prestamos.add(new Prestamo(libro, usuario));
+        prestamos.add(new Prestamo(libro, usuario, LocalDate.now()));
+            System.out.println("Prestamo realizado" );
     }
 
     //Metodo que devuelve un libro prestado por un usuario
@@ -132,6 +134,14 @@ public class Biblioteca {
             }
 
         usuario.devolver(libro);
+        for (int i = 0; i < prestamos.size(); i++) {
+            Prestamo p = prestamos.get(i);
+            if (p.getLibro().getISBN() == isbn && p.getUsuario().getId().equals(idUsuario)) {
+                prestamos.remove(i);
+                System.out.println("Devolucin registrada correctamente");
+                return;
+            }
+        }
     }
 
     //Metodo que muestra la lista de libros
