@@ -33,6 +33,10 @@ public class Doctor {
         return especialidad;
     }
 
+    public String getHorarioAtencion() {
+        return horarioAtencion;
+    }
+
     public void setCodigoDoctor(String codigoDoctor) {
         this.codigoDoctor = codigoDoctor;
     }
