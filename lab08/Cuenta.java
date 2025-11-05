@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  * Clase Cuenta
@@ -85,4 +86,45 @@ public class Cuenta {
     public void agregarTitular(Cliente cliente) {
         titulares.add(cliente);
     }
-}
+    public void mostrarMovimientos() {
+        if (movimientos.isEmpty()) {
+            System.out.println("No hay movimientos.");
+            return;
+        }
+
+        for (Transaccion t : movimientos) {
+            System.out.println(t.getResumen());
+            System.out.println("----------------");
+        }
+    }
+
+    public void mostrarResumen() {
+        System.out.println("\n--- RESUMEN DE CUENTA ---");
+        System.out.println("Número: " + numero);
+        System.out.println("Tipo: " + tipo);
+        System.out.println("Saldo: S/ " + saldo);
+
+        System.out.println("Titulares:");
+        for (Cliente c : titulares) {
+            System.out.println(" - " + c.getNombre());
+        }
+
+        mostrarMovimientos();
+    }
+
+    public void filtrarMovimientos() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("\n1. Solo depósitos");
+        System.out.println("2. Solo retiros");
+        System.out.print("Opción: ");
+        int op = sc.nextInt();
+
+        for (Transaccion t : movimientos) {
+            if (op == 1 && t instanceof Deposito)
+                System.out.println(t.getResumen());
+            if (op == 2 && t instanceof Retiro)
+                System.out.println(t.getResumen());
+        }
+    }
+
+    }
