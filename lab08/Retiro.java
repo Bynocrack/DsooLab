@@ -16,9 +16,9 @@ public class Retiro extends Transaccion {
     @Override
     public void procesar() {
         if (cuenta.debitar(monto, this)) {
-            System.out.println("✅ Retiro exitoso.");
+            System.out.println(" Retiro exitoso.");
         } else {
-            System.out.println("❌ Saldo insuficiente.");
+            System.out.println(" Saldo insuficiente.");
         }
     }
 }

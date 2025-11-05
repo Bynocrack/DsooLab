@@ -3,8 +3,6 @@ public class Empleado extends Persona {
     private String idEmpleado;
     private String cargo;
 
-    public Empleado() {}
-
     public Empleado(String dni, String nombre, String direccion, String telefono, String email,
                     String idEmpleado, String cargo) {
 
