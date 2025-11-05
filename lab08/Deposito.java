@@ -16,6 +16,6 @@ public class Deposito extends Transaccion {
     @Override
     public void procesar() {
         cuenta.acreditar(monto, this);
-        System.out.println("✅ Depósito exitoso.");
+        System.out.println(" Depósito exitoso.");
     }
 }

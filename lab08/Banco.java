@@ -16,7 +16,7 @@ public class Banco {
     public void listarClientes() {
         System.out.println("\n--- LISTA DE CLIENTES ---");
         for (Cliente c : clientes) {
-            System.out.println(c.getIdCliente() + " - " + c.getNombre());
+            System.out.println(c.getIdCliente() + " - " + c.getNombre() + " - " + c.getDni());
         }
     }
 
@@ -44,7 +44,7 @@ public class Banco {
         Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, idCliente);
         clientes.add(nuevo);
 
-        System.out.println("✅ Cliente registrado correctamente.");
+        System.out.println(" Cliente registrado correctamente.");
     }
 
     public Cliente seleccionarCliente() {
@@ -56,7 +56,7 @@ public class Banco {
             if (c.getIdCliente().equals(id))
                 return c;
 
-        System.out.println("❌ No existe ese cliente.");
+        System.out.println(" No existe ese cliente.");
         return null;
     }
 
@@ -67,7 +67,7 @@ public class Banco {
     public void listarEmpleados() {
         System.out.println("\n--- LISTA DE EMPLEADOS ---");
         for (Empleado e : empleados) {
-            System.out.println(e.getIdEmpleado() + " - " + e.getNombre());
+            System.out.println(e.getIdEmpleado() + " - " + e.getNombre() + " - " + e.getDni());
         }
     }
 
@@ -98,7 +98,7 @@ public class Banco {
         Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, idEmpleado, cargo);
         empleados.add(nuevo);
 
-        System.out.println("✅ Empleado registrado correctamente.");
+        System.out.println(" Empleado registrado correctamente.");
     }
 
     public Empleado seleccionarEmpleado() {
@@ -110,7 +110,7 @@ public class Banco {
             if (e.getIdEmpleado().equals(id))
                 return e;
 
-        System.out.println("❌ No existe ese empleado.");
+        System.out.println(" No existe ese empleado.");
         return null;
     }
 
@@ -131,7 +131,7 @@ public class Banco {
         Cuenta cuenta = crearCuenta(titulares, saldo);
         titular.agregarCuenta(cuenta);
 
-        System.out.println("✅ Cuenta creada con número: " + cuenta.getNumero());
+        System.out.println(" Cuenta creada con número: " + cuenta.getNumero());
     }
 
     public Cuenta crearCuenta(ArrayList<Cliente> titulares, float saldoInicial) {
@@ -154,7 +154,7 @@ public class Banco {
             if (c.getNumero().equals(num))
                 return c;
 
-        System.out.println("❌ No existe esa cuenta.");
+        System.out.println(" No existe esa cuenta.");
         return null;
     }
 
@@ -235,9 +235,7 @@ public class Banco {
         cuenta.filtrarMovimientos();
     }
 
-    // ============================================
-    //   AUXILIARES
-    // ============================================
+    
 
     private int leerInt() {
         while (!sc.hasNextInt()) {

@@ -20,7 +20,7 @@ public class Main {
         Cuenta cuenta = banco.crearCuenta(titulares, 500);
         cliente.agregarCuenta(cuenta);
 
-        int op;
+        String op;
 
         do {
             System.out.println("\n===============================");
@@ -37,24 +37,23 @@ public class Main {
             System.out.println("9. Salir");
             System.out.print("Opción: ");
 
-            op = sc.nextInt();
-            sc.nextLine();
+            op = sc.nextLine();
 
             switch (op) {
 
-                case 1 -> banco.listarClientes();
-                case 2 -> banco.registrarClienteDesdeTeclado();
-                case 3 -> banco.listarEmpleados();
-                case 4 -> banco.registrarEmpleadoDesdeTeclado();
-                case 5 -> banco.crearCuentaDesdeTeclado();
-                case 6 -> banco.operaciones();
-                case 7 -> banco.mostrarResumenCuenta();
-                case 8 -> banco.filtrarMovimientos();
+                case "1" -> banco.listarClientes();
+                case "2" -> banco.registrarClienteDesdeTeclado();
+                case "3" -> banco.listarEmpleados();
+                case "4" -> banco.registrarEmpleadoDesdeTeclado();
+                case "5" -> banco.crearCuentaDesdeTeclado();
+                case "6" -> banco.operaciones();
+                case "7" -> banco.mostrarResumenCuenta();
+                case "8" -> banco.filtrarMovimientos();
 
-                case 9 -> System.out.println("Saliendo...");
+                case "9" -> System.out.println("Saliendo...");
                 default -> System.out.println(" Opción inválida.");
             }
 
-        } while (op != 9);
+        } while (!op.equals("9"));
     }
 }
