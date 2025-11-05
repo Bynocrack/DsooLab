@@ -28,4 +28,11 @@ public class Cliente extends Persona {
         for (Cuenta c : cuentas) total += c.getSaldo();
         return Math.round(total * 100) / 100f;
     }
+    public void mostrarResumenCuentas() {
+    System.out.println("\n--- CUENTAS DEL CLIENTE " + nombre + " ---");
+    for (Cuenta c : cuentas) {
+        System.out.println(c.getNumero() + " - Saldo: S/ " + c.getSaldo());
+    }
+}
+
 }
