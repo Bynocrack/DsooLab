@@ -8,11 +8,10 @@ public class Main {
 
         Banco banco = new Banco();
 
-        // DATOS PREDETERMINADOS
-        Empleado emp = new Empleado("12345678","Carlos López","Av. Lima 101","999999999","empleado@banco.com","EMP01","Cajero");
+        Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","EMP01","Cajero");
         banco.empleados.add(emp);
 
-        Cliente cliente = new Cliente("87654321","Brayan Motta","Cayma - Arequipa","912345678","brayan@gmail.com","CLI01");
+        Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","CLI01");
         banco.clientes.add(cliente);
 
         ArrayList<Cliente> titulares = new ArrayList<>();
@@ -26,35 +25,28 @@ public class Main {
             System.out.println("\n===============================");
             System.out.println("      SISTEMA DEL BANCO");
             System.out.println("===============================");
-            System.out.println("1. Listar clientes");
-            System.out.println("2. Registrar cliente");
-            System.out.println("3. Listar empleados");
-            System.out.println("4. Registrar empleado");
-            System.out.println("5. Crear cuenta");
-            System.out.println("6. Operaciones bancarias");
-            System.out.println("7. Resumen de cuenta");
-            System.out.println("8. Filtrar movimientos");
-            System.out.println("9. Salir");
+            System.out.println("1. Entrar como TRABAJADOR");
+            System.out.println("2. Entrar como CLIENTE");
+            System.out.println("3. Salir");
             System.out.print("Opción: ");
 
-            op = sc.nextInt();
-            sc.nextLine();
+            try {
+                op = sc.nextInt();
+                sc.nextLine();
+            } catch (InputMismatchException e) {
+                sc.nextLine();
+                op = 0; 
+            }
 
             switch (op) {
 
-                case 1 -> banco.listarClientes();
-                case 2 -> banco.registrarClienteDesdeTeclado();
-                case 3 -> banco.listarEmpleados();
-                case 4 -> banco.registrarEmpleadoDesdeTeclado();
-                case 5 -> banco.crearCuentaDesdeTeclado();
-                case 6 -> banco.operaciones();
-                case 7 -> banco.mostrarResumenCuenta();
-                case 8 -> banco.filtrarMovimientos();
+                case 1 -> banco.menuTrabajador();
+                case 2 -> banco.menuCliente();
 
-                case 9 -> System.out.println("Saliendo...");
+                case 3 -> System.out.println("Saliendo...");
                 default -> System.out.println(" Opción inválida.");
             }
 
-        } while (op != 9);
+        } while (op != 3);
     }
 }

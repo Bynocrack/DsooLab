@@ -41,6 +41,7 @@ public class Banco {
         System.out.print("ID Cliente: ");
         String idCliente = sc.nextLine();
 
+        // Los setters con validación se ejecutan en el constructor de Cliente
         Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, idCliente);
         clientes.add(nuevo);
 
@@ -95,6 +96,7 @@ public class Banco {
         System.out.print("Cargo: ");
         String cargo = sc.nextLine();
 
+        // Los setters con validación se ejecutan en el constructor de Empleado
         Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, idEmpleado, cargo);
         empleados.add(nuevo);
 
@@ -162,16 +164,14 @@ public class Banco {
     //   OPERACIONES
     // ============================================
 
-    public void operaciones() {
+    // Modificado para recibir el empleado
+    public void operaciones(Empleado emp) {
 
         Cliente cli = seleccionarCliente();
         if (cli == null) return;
 
         Cuenta cuenta = seleccionarCuenta(cli);
         if (cuenta == null) return;
-
-        Empleado emp = seleccionarEmpleado();
-        if (emp == null) return;
 
         int op;
         do {
@@ -192,6 +192,7 @@ public class Banco {
                 case 2 -> {
                     System.out.print("Monto depósito: ");
                     float m = leerFloat();
+                    // Se usa el empleado pasado por parámetro
                     Deposito d = emp.registrarDeposito(cuenta, m, cli);
                     d.procesar();
                 }
@@ -199,6 +200,7 @@ public class Banco {
                 case 3 -> {
                     System.out.print("Monto retiro: ");
                     float m = leerFloat();
+                    // Se usa el empleado pasado por parámetro
                     Retiro r = emp.registrarRetiro(cuenta, m, cli);
                     r.procesar();
                 }
@@ -209,10 +211,13 @@ public class Banco {
         } while (op != 5);
     }
 
-    public void mostrarResumenCuenta() {
+    // Modificado para recibir el cliente
+    public void mostrarResumenCuenta(Cliente cli) {
 
-        Cliente cli = seleccionarCliente();
-        if (cli == null) return;
+        if (cli.getCuentas().isEmpty()) {
+            System.out.println("El cliente no tiene cuentas registradas.");
+            return;
+        }
 
         Cuenta cuenta = seleccionarCuenta(cli);
         if (cuenta == null) return;
@@ -224,16 +229,79 @@ public class Banco {
     //   FILTRO DE MOVIMIENTOS
     // ============================================
 
-    public void filtrarMovimientos() {
+    // Modificado para recibir el cliente
+    public void filtrarMovimientos(Cliente cli) {
 
-        Cliente cli = seleccionarCliente();
-        if (cli == null) return;
+        if (cli.getCuentas().isEmpty()) {
+            System.out.println("El cliente no tiene cuentas registradas.");
+            return;
+        }
 
         Cuenta cuenta = seleccionarCuenta(cli);
         if (cuenta == null) return;
 
         cuenta.filtrarMovimientos();
     }
+
+
+    // ============================================
+    //   MENÚS DE ROL (Nuevos)
+    // ============================================
+
+    public void menuTrabajador() {
+        Empleado empleadoLogueado = seleccionarEmpleado();
+        if (empleadoLogueado == null) return;
+
+        int op;
+        do {
+            System.out.println("\n--- MENÚ TRABAJADOR (" + empleadoLogueado.getNombre() + ") ---");
+            System.out.println("1. Listar clientes");
+            System.out.println("2. Registrar cliente");
+            System.out.println("3. Listar empleados");
+            System.out.println("4. Registrar empleado");
+            System.out.println("5. Crear cuenta");
+            System.out.println("6. Realizar Operaciones Bancarias (Depósito/Retiro)");
+            System.out.println("7. Volver al menú principal");
+            System.out.print("Opción: ");
+
+            op = leerInt();
+
+            switch (op) {
+                case 1 -> listarClientes();
+                case 2 -> registrarClienteDesdeTeclado();
+                case 3 -> listarEmpleados();
+                case 4 -> registrarEmpleadoDesdeTeclado();
+                case 5 -> crearCuentaDesdeTeclado();
+                case 6 -> operaciones(empleadoLogueado); // Pasar el empleado
+                case 7 -> System.out.println("Volviendo...");
+                default -> System.out.println(" Opción inválida.");
+            }
+        } while (op != 7);
+    }
+
+    public void menuCliente() {
+        Cliente clienteLogueado = seleccionarCliente();
+        if (clienteLogueado == null) return;
+
+        int op;
+        do {
+            System.out.println("\n--- MENÚ CLIENTE (" + clienteLogueado.getNombre() + ") ---");
+            System.out.println("1. Consultar resumen de cuentas");
+            System.out.println("2. Ver/Filtrar movimientos de una cuenta");
+            System.out.println("3. Volver al menú principal");
+            System.out.print("Opción: ");
+
+            op = leerInt();
+
+            switch (op) {
+                case 1 -> mostrarResumenCuenta(clienteLogueado); // Pasar el cliente
+                case 2 -> filtrarMovimientos(clienteLogueado); // Pasar el cliente
+                case 3 -> System.out.println("Volviendo...");
+                default -> System.out.println(" Opción inválida.");
+            }
+        } while (op != 3);
+    }
+
 
     // ============================================
     //   AUXILIARES
