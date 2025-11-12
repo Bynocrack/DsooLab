@@ -35,7 +35,16 @@ public class Persona {
             telefono = sc.nextLine();
         }
     }
-    public void setEmail(String email) { this.email = email; }
+    public void setEmail(String email) { 
+        while (true) {
+            if (email.matches("^.+@.+\\..+$")) {
+                this.email = email;
+                return;
+            }
+            System.out.println("Email inválido. Debe contener un '@' y un dominio válido.\nIntente nuevamente:");
+            email = sc.nextLine();
+        }
+    }
     public void setDni(String dni) {
         while (true) {
             if (dni.matches("\\d{8}")) {

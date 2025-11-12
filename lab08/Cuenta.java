@@ -1,11 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-/**
- * Clase Cuenta
- * Representa una cuenta bancaria con soporte para depósitos, retiros
- * y registro de movimientos. El saldo se maneja con redondeo a 2 decimales.
- */
 public class Cuenta {
 
     private String numero;
@@ -14,9 +9,6 @@ public class Cuenta {
     private ArrayList<Transaccion> movimientos;
     private ArrayList<Cliente> titulares;
 
-    /**
-     * Constructor de la cuenta
-     */
     public Cuenta(String numero, String tipo, float saldoInicial, ArrayList<Cliente> titulares) {
         this.numero = numero;
         this.tipo = tipo;
@@ -25,9 +17,6 @@ public class Cuenta {
         this.movimientos = new ArrayList<>();
     }
 
-    /**
-     * Redondea un monto a 2 decimales.
-     */
     private float redondear(float monto) {
         return Math.round(monto * 100) / 100f;
     }
@@ -53,17 +42,11 @@ public class Cuenta {
     // MÉTODOS DE NEGOCIO
     // ====================================
 
-    /**
-     * Acredita un monto a la cuenta.
-     */
     public void acreditar(float monto, Transaccion t) {
         saldo = redondear(saldo + monto);
         movimientos.add(t);
     }
 
-    /**
-     * Debita un monto si hay saldo suficiente.
-     */
     public boolean debitar(float monto, Transaccion t) {
         if (saldo >= monto) {
             saldo = redondear(saldo - monto);
@@ -73,16 +56,10 @@ public class Cuenta {
         return false;
     }
 
-    /**
-     * Retorna la lista completa de movimientos.
-     */
     public ArrayList<Transaccion> listarMovimientos() {
         return movimientos;
     }
 
-    /**
-     * Agrega un nuevo titular a la cuenta.
-     */
     public void agregarTitular(Cliente cliente) {
         titulares.add(cliente);
     }
