@@ -4,13 +4,15 @@ public class Cliente extends Persona {
 
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
+    private String contraseña;
 
     public Cliente(String dni, String nombre, String direccion,
-                   String telefono, String email, String idCliente) {
+                   String telefono, String email, String idCliente, String contraseña) {
 
         super(dni, nombre, direccion, telefono, email);
         this.idCliente = idCliente;
         this.cuentas = new ArrayList<>();
+        this.contraseña = contraseña;
     }
 
     public void agregarCuenta(Cuenta cuenta) {
@@ -19,6 +21,14 @@ public class Cliente extends Persona {
 
     public ArrayList<Cuenta> getCuentas() {
         return cuentas;
+    }
+    public boolean autenticar(String intento) {
+        if(intento.equals(contraseña)){
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     public String getIdCliente() { return idCliente; }
