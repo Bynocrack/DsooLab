@@ -41,8 +41,11 @@ public class Banco {
         System.out.print("ID Cliente: ");
         String idCliente = sc.nextLine();
 
+        System.out.println("Contraseña Usuario: ");
+        String contraseña = sc.nextLine();
+
         // Los setters con validación se ejecutan en el constructor de Cliente
-        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, idCliente);
+        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, idCliente, contraseña);
         clientes.add(nuevo);
 
         System.out.println("✅ Cliente registrado correctamente.");
@@ -93,11 +96,16 @@ public class Banco {
         System.out.print("ID Empleado: ");
         String idEmpleado = sc.nextLine();
 
+        System.out.print("Contraseña Empleado");
+        String contraseña = sc.nextLine();
+
         System.out.print("Cargo: ");
         String cargo = sc.nextLine();
 
+
+
         // Los setters con validación se ejecutan en el constructor de Empleado
-        Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, idEmpleado, cargo);
+        Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, idEmpleado, cargo, contraseña);
         empleados.add(nuevo);
 
         System.out.println("✅ Empleado registrado correctamente.");
@@ -250,8 +258,15 @@ public class Banco {
 
     public void menuTrabajador() {
         Empleado empleadoLogueado = seleccionarEmpleado();
+        
         if (empleadoLogueado == null) return;
-
+        System.out.println("Por favor digite su contraseña");
+        String contraseña = sc.nextLine();
+        
+        if(!(empleadoLogueado.autenticar(contraseña))){
+            System.out.println("¡CONTRASEÑA EQUIVOCADA!");
+            return;
+        }
         int op;
         do {
             System.out.println("\n--- MENÚ TRABAJADOR (" + empleadoLogueado.getNombre() + ") ---");
@@ -282,7 +297,13 @@ public class Banco {
     public void menuCliente() {
         Cliente clienteLogueado = seleccionarCliente();
         if (clienteLogueado == null) return;
-
+         System.out.println("Por favor digite su contraseña");
+        String contraseña = sc.nextLine();
+        
+        if(!(clienteLogueado.autenticar(contraseña))){
+            System.out.println("¡CONTRASEÑA EQUIVOCADA!");
+            return;
+        }
         int op;
         do {
             System.out.println("\n--- MENÚ CLIENTE (" + clienteLogueado.getNombre() + ") ---");
