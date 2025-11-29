@@ -5,7 +5,7 @@ public class Biblioteca {
 
     // Atributos
     private ArrayList<Libro> catalogo;
-    private ArrayList<Usuario> usuarios;
+    private ArrayList<Usuarios> usuarios;
     private ArrayList<Prestamo> prestamos;
 
     // Constructor
@@ -29,9 +29,9 @@ public class Biblioteca {
     }
 
     //Metodo que agrega usuarios
-    public ArrayList<Usuario> agregarUsuario(){
+    public ArrayList<Usuarios> agregarUsuario(){
 
-        Usuario nuevoUsuario = new Usuario();   
+        Usuarios nuevoUsuario = new Usuarios();   
             if(!existeUsuario(nuevoUsuario.getId())){
                 usuarios.add(nuevoUsuario);
                 System.out.println("Usuario agregado correctamente.");
@@ -43,7 +43,7 @@ public class Biblioteca {
 
     //Getters
     public ArrayList<Libro> getCatalogo(){ return catalogo; }
-    public ArrayList<Usuario> getUsuarios(){ return usuarios; }
+    public ArrayList<Usuarios> getUsuarios(){ return usuarios; }
     public ArrayList<Prestamo> getPrestamos(){ return prestamos; }
     
     //Metodo que verifica si existe un libro 
@@ -60,7 +60,7 @@ public class Biblioteca {
     //Metodo que verifica si existe un usuario
     public boolean existeUsuario(String id){
 
-        for (Usuario usuario : usuarios){
+        for (Usuarios usuario : usuarios){
             if (usuario.getId().equals(id)){
                 return true;
             }
@@ -80,9 +80,9 @@ public class Biblioteca {
     }
 
     //Metodo que busca un usuario por su ID
-    public Usuario buscarUsuario(String id){
+    public Usuarios buscarUsuario(String id){
 
-        for (Usuario usuario : usuarios) {
+        for (Usuarios usuario : usuarios) {
             if (usuario.getId().equals(id)){
                 return usuario;
             }
@@ -94,7 +94,7 @@ public class Biblioteca {
     public void prestar(int isbn, String idUsuario){
 
         Libro libro = buscarLibro(isbn);
-        Usuario usuario = buscarUsuario(idUsuario);
+        Usuarios usuario = buscarUsuario(idUsuario);
 
             if (libro == null){
                 System.out.println(" No se encontro el libro con ISBN "+ isbn); 
@@ -118,7 +118,7 @@ public class Biblioteca {
     public void devolver(int isbn, String idUsuario){
 
         Libro libro = buscarLibro(isbn);
-        Usuario usuario = buscarUsuario(idUsuario);
+        Usuarios usuario = buscarUsuario(idUsuario);
 
             if (libro == null){
                 System.out.println("No se encontro el libro con ISBN "+ isbn);
@@ -157,7 +157,7 @@ public class Biblioteca {
     public void mostrarUsuarios(){
 
         System.out.println("Lista de usuarios:");
-            for (Usuario usuario : usuarios) {
+            for (Usuarios usuario : usuarios) {
                 System.out.println(usuario);
             }
     }

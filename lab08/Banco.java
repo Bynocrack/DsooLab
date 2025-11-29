@@ -23,13 +23,24 @@ public class Banco {
         System.out.println("Cliente registrado correctamente.");
     }
 
-    public Cliente seleccionarCliente() {
+    public Cliente seleccionarClienteporID() {
         listarClientes();
         System.out.print("ID Cliente: ");
         String id = sc.nextLine();
 
         for (Cliente c : clientes)
             if (c.getIdCliente().equals(id))
+                return c;
+
+        System.out.println("No existe ese cliente.");
+        return null;
+    }
+    public Cliente seleccionarClienteporUsuario() {
+        System.out.print("Usuario Cliente: ");
+        String usuario = sc.nextLine();
+
+        for (Cliente c : clientes)
+            if (c.getUsuario().equals(usuario))
                 return c;
 
         System.out.println("No existe ese cliente.");
@@ -73,7 +84,7 @@ public class Banco {
         System.out.println("Empleado registrado correctamente.");
     }
 
-    public Empleado seleccionarEmpleado() {
+    public Empleado seleccionarEmpleadoporID() {
         listarEmpleados();
         System.out.print("ID Empleado: ");
         String id = sc.nextLine();
@@ -85,10 +96,25 @@ public class Banco {
         System.out.println("No existe ese empleado.");
         return null;
     }
+    public Empleado seleccionarEmpleadoporUsuario() {
+        System.out.print("Usuario Empleado: ");
+        String usuario = sc.nextLine();
+
+        for (Empleado e : empleados)
+            if (e.getUsuario().equals(usuario))
+                return e;
+
+        System.out.println("No existe ese empleado.");
+        return null;
+    }
 
     public void crearCuentaDesdeTeclado() {
-        Cliente titular = seleccionarCliente();
+        Cliente titular = seleccionarClienteporUsuario();
         if (titular == null) return;
+
+        /*    public void crearCuentaDesdeTeclado() {
+        Cliente titular = seleccionarCliente();
+        if (titular == null) return; */
 
         System.out.print("Saldo inicial: ");
         float saldo = leerFloat();
@@ -128,9 +154,11 @@ public class Banco {
 
     public void operaciones(Empleado emp) {
 
-        Cliente cli = seleccionarCliente();
+        Cliente cli = seleccionarClienteporUsuario();
         if (cli == null) return;
 
+        /*Cliente cli = seleccionarCliente();
+        if (cli == null) return; */
         Cuenta cuenta = seleccionarCuenta(cli);
         if (cuenta == null) return;
 
@@ -197,14 +225,15 @@ public class Banco {
     }
 
     public void menuTrabajador() {
-        Empleado empleadoLogueado = seleccionarEmpleado();
-        
+        Empleado empleadoLogueado = seleccionarEmpleadoporUsuario();
+        /*Empleado empleadoLogueado = seleccionarEmpleado(); */
         if (empleadoLogueado == null) return;
-        System.out.println("Por favor digite su contraseña");
-        String contraseña = sc.nextLine();
+        System.out.println("Por favor digite su usuario");
+        String usuario = sc.nextLine();
         
-        if(!(empleadoLogueado.autenticar(contraseña))){
-            System.out.println("¡CONTRASEÑA EQUIVOCADA!");
+         System.out.println("Por favor digite su contraseña");
+        String contraseña = sc.nextLine();
+        if(!(empleadoLogueado.login(usuario, contraseña))){
             return;
         }
         int op;
@@ -235,7 +264,8 @@ public class Banco {
     }
 
     public void menuCliente() {
-        Cliente clienteLogueado = seleccionarCliente();
+        Cliente clienteLogueado = seleccionarClienteporUsuario();
+        /*Cliente clienteLogueado = seleccionarCliente(); */
         if (clienteLogueado == null) return;
         System.out.println("Por favor digite su usuario");
         String usuario = sc.nextLine();

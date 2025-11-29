@@ -1,8 +1,6 @@
 import java.util.*;
 public class Empleado extends Usuario {
-
     private String idEmpleado;
-    private String contraseña;
     private Scanner sc = new Scanner(System.in);
 
     public Empleado(String dni, String nombre, String direccion, String telefono, String email,
@@ -10,19 +8,9 @@ public class Empleado extends Usuario {
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idEmpleado = "EM" + dni;
-        this.contraseña = contraseña;
     }
 
     public String getIdEmpleado() { return idEmpleado; }
-
-    public boolean autenticar(String intento) {
-        if(intento.equals(contraseña)){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }
 
     public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) {
         return new Deposito(cuenta, monto, cliente, this);
@@ -31,8 +19,8 @@ public class Empleado extends Usuario {
     public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) {
         return new Retiro(cuenta, monto, cliente, this);
     }
-    
-     public Cliente registrarClienteDesdeTeclado() {
+
+    public Cliente registrarClienteDesdeTeclado() {
         System.out.println("\n--- REGISTRAR CLIENTE ---");
 
         System.out.print("DNI: ");

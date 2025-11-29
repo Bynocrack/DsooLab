@@ -11,7 +11,7 @@ public  class Usuario extends Persona {
     this.contraseña = contraseña;
     this.estado = "INACTIVO"; // ???????????
     }
-    
+
     public String getUsuario() { return usuario; }
     public String getEstado() { return estado; }
     public String getContraseña() { return contraseña; }
@@ -57,5 +57,3 @@ public  class Usuario extends Persona {
         System.out.println("Hola");
     }
 }
-
-
