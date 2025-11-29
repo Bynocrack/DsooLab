@@ -8,10 +8,10 @@ public class Main {
 
         Banco banco = new Banco();
 
-        Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","EMP01","Cajero", "AM");
+        Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","DegoX", "AM");
         banco.empleados.add(emp);
 
-        Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","CLI01","CHOCA");
+        Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","bmotta","CHOCA");
         banco.clientes.add(cliente);
 
         ArrayList<Cliente> titulares = new ArrayList<>();

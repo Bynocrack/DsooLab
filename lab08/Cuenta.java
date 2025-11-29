@@ -21,26 +21,16 @@ public class Cuenta {
         return Math.round(monto * 100) / 100f;
     }
 
-    // ====================================
-    // GETTERS
-    // ====================================
     public String getNumero() { return numero; }
     public String getTipo() { return tipo; }
     public float getSaldo() { return saldo; }
     public ArrayList<Cliente> getTitulares() { return titulares; }
     public ArrayList<Transaccion> getMovimientos() { return movimientos; }
 
-    // ====================================
-    // SETTERS
-    // ====================================
     public void setNumero(String numero) { this.numero = numero; }
     public void setTipo(String tipo) { this.tipo = tipo; }
     public void setSaldo(float saldo) { this.saldo = redondear(saldo); }
     public void setTitulares(ArrayList<Cliente> titulares) { this.titulares = titulares; }
-
-    // ====================================
-    // MÉTODOS DE NEGOCIO
-    // ====================================
 
     public void acreditar(float monto, Transaccion t) {
         saldo = redondear(saldo + monto);
@@ -104,4 +94,4 @@ public class Cuenta {
         }
     }
 
-    }
+}

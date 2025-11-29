@@ -9,10 +9,6 @@ public class Banco {
 
     private Scanner sc = new Scanner(System.in);
 
-    // ============================================
-    //   CLIENTES
-    // ============================================
-
     public void listarClientes() {
         System.out.println("\n--- LISTA DE CLIENTES ---");
         for (Cliente c : clientes) {
@@ -20,35 +16,11 @@ public class Banco {
         }
     }
 
-    public void registrarClienteDesdeTeclado() {
-        System.out.println("\n--- REGISTRAR CLIENTE ---");
-
-        System.out.print("DNI: ");
-        String dni = sc.nextLine();
-
-        System.out.print("Nombre: ");
-        String nombre = sc.nextLine();
-
-        System.out.print("Dirección: ");
-        String direccion = sc.nextLine();
-
-        System.out.print("Teléfono: ");
-        String telefono = sc.nextLine();
-
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-
-        System.out.print("ID Cliente: ");
-        String idCliente = sc.nextLine();
-
-        System.out.println("Contraseña Usuario: ");
-        String contraseña = sc.nextLine();
-
-        // Los setters con validación se ejecutan en el constructor de Cliente
-        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, idCliente, contraseña);
+    public void registrarCliente(Empleado emp) {
+        Cliente nuevo = emp.registrarClienteDesdeTeclado();
         clientes.add(nuevo);
 
-        System.out.println("✅ Cliente registrado correctamente.");
+        System.out.println("Cliente registrado correctamente.");
     }
 
     public Cliente seleccionarCliente() {
@@ -60,13 +32,9 @@ public class Banco {
             if (c.getIdCliente().equals(id))
                 return c;
 
-        System.out.println("❌ No existe ese cliente.");
+        System.out.println("No existe ese cliente.");
         return null;
     }
-
-    // ============================================
-    //   EMPLEADOS
-    // ============================================
 
     public void listarEmpleados() {
         System.out.println("\n--- LISTA DE EMPLEADOS ---");
@@ -93,22 +61,16 @@ public class Banco {
         System.out.print("Email: ");
         String email = sc.nextLine();
 
-        System.out.print("ID Empleado: ");
-        String idEmpleado = sc.nextLine();
+        System.out.print("Usuario: ");
+        String usuario = sc.nextLine();
 
-        System.out.print("Contraseña Empleado");
+        System.out.print("Contraseña Empleado: ");
         String contraseña = sc.nextLine();
 
-        System.out.print("Cargo: ");
-        String cargo = sc.nextLine();
-
-
-
-        // Los setters con validación se ejecutan en el constructor de Empleado
-        Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, idEmpleado, cargo, contraseña);
+        Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, usuario, contraseña);
         empleados.add(nuevo);
 
-        System.out.println("✅ Empleado registrado correctamente.");
+        System.out.println("Empleado registrado correctamente.");
     }
 
     public Empleado seleccionarEmpleado() {
@@ -120,13 +82,9 @@ public class Banco {
             if (e.getIdEmpleado().equals(id))
                 return e;
 
-        System.out.println("❌ No existe ese empleado.");
+        System.out.println("No existe ese empleado.");
         return null;
     }
-
-    // ============================================
-    //   CUENTAS
-    // ============================================
 
     public void crearCuentaDesdeTeclado() {
         Cliente titular = seleccionarCliente();
@@ -141,7 +99,7 @@ public class Banco {
         Cuenta cuenta = crearCuenta(titulares, saldo);
         titular.agregarCuenta(cuenta);
 
-        System.out.println("✅ Cuenta creada con número: " + cuenta.getNumero());
+        System.out.println("Cuenta creada con número: " + cuenta.getNumero());
     }
 
     public Cuenta crearCuenta(ArrayList<Cliente> titulares, float saldoInicial) {
@@ -164,15 +122,10 @@ public class Banco {
             if (c.getNumero().equals(num))
                 return c;
 
-        System.out.println("❌ No existe esa cuenta.");
+        System.out.println("No existe esa cuenta.");
         return null;
     }
 
-    // ============================================
-    //   OPERACIONES
-    // ============================================
-
-    // Modificado para recibir el empleado
     public void operaciones(Empleado emp) {
 
         Cliente cli = seleccionarCliente();
@@ -200,7 +153,6 @@ public class Banco {
                 case 2 -> {
                     System.out.print("Monto depósito: ");
                     float m = leerFloat();
-                    // Se usa el empleado pasado por parámetro
                     Deposito d = emp.registrarDeposito(cuenta, m, cli);
                     d.procesar();
                 }
@@ -208,7 +160,6 @@ public class Banco {
                 case 3 -> {
                     System.out.print("Monto retiro: ");
                     float m = leerFloat();
-                    // Se usa el empleado pasado por parámetro
                     Retiro r = emp.registrarRetiro(cuenta, m, cli);
                     r.procesar();
                 }
@@ -219,7 +170,6 @@ public class Banco {
         } while (op != 5);
     }
 
-    // Modificado para recibir el cliente
     public void mostrarResumenCuenta(Cliente cli) {
 
         if (cli.getCuentas().isEmpty()) {
@@ -233,11 +183,6 @@ public class Banco {
         cuenta.mostrarResumen();
     }
 
-    // ============================================
-    //   FILTRO DE MOVIMIENTOS
-    // ============================================
-
-    // Modificado para recibir el cliente
     public void filtrarMovimientos(Cliente cli) {
 
         if (cli.getCuentas().isEmpty()) {
@@ -250,11 +195,6 @@ public class Banco {
 
         cuenta.filtrarMovimientos();
     }
-
-
-    // ============================================
-    //   MENÚS DE ROL (Nuevos)
-    // ============================================
 
     public void menuTrabajador() {
         Empleado empleadoLogueado = seleccionarEmpleado();
@@ -283,11 +223,11 @@ public class Banco {
 
             switch (op) {
                 case 1 -> listarClientes();
-                case 2 -> registrarClienteDesdeTeclado();
+                case 2 -> registrarCliente(empleadoLogueado);
                 case 3 -> listarEmpleados();
                 case 4 -> registrarEmpleadoDesdeTeclado();
                 case 5 -> crearCuentaDesdeTeclado();
-                case 6 -> operaciones(empleadoLogueado); // Pasar el empleado
+                case 6 -> operaciones(empleadoLogueado);
                 case 7 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
@@ -297,11 +237,12 @@ public class Banco {
     public void menuCliente() {
         Cliente clienteLogueado = seleccionarCliente();
         if (clienteLogueado == null) return;
-         System.out.println("Por favor digite su contraseña");
+        System.out.println("Por favor digite su usuario");
+        String usuario = sc.nextLine();
+        System.out.println("Por favor digite su contraseña");
         String contraseña = sc.nextLine();
         
-        if(!(clienteLogueado.autenticar(contraseña))){
-            System.out.println("¡CONTRASEÑA EQUIVOCADA!");
+        if(!(clienteLogueado.login(usuario, contraseña))){
             return;
         }
         int op;
@@ -315,18 +256,13 @@ public class Banco {
             op = leerInt();
 
             switch (op) {
-                case 1 -> mostrarResumenCuenta(clienteLogueado); // Pasar el cliente
-                case 2 -> filtrarMovimientos(clienteLogueado); // Pasar el cliente
+                case 1 -> mostrarResumenCuenta(clienteLogueado);
+                case 2 -> filtrarMovimientos(clienteLogueado);
                 case 3 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
         } while (op != 3);
     }
-
-
-    // ============================================
-    //   AUXILIARES
-    // ============================================
 
     private int leerInt() {
         while (!sc.hasNextInt()) {
