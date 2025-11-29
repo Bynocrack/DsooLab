@@ -5,6 +5,7 @@ public class Banco {
 
     public ArrayList<Cliente> clientes = new ArrayList<>();
     public ArrayList<Empleado> empleados = new ArrayList<>();
+    public ArrayList<Administrador> administradores = new ArrayList<>();
     public ArrayList<Cuenta> cuentas = new ArrayList<>();
 
     private Scanner sc = new Scanner(System.in);
@@ -16,14 +17,14 @@ public class Banco {
         }
     }
 
-    public void registrarCliente(Empleado emp) {
-        Cliente nuevo = emp.registrarClienteDesdeTeclado();
+    public void registrarCliente(Trabajador trabajador) {
+        Cliente nuevo = trabajador.registrarClienteDesdeTeclado();
         clientes.add(nuevo);
 
         System.out.println("Cliente registrado correctamente.");
     }
 
-    public Cliente seleccionarClienteporID() {
+    public Cliente seleccionarClientePorID() {
         listarClientes();
         System.out.print("ID Cliente: ");
         String id = sc.nextLine();
@@ -35,10 +36,7 @@ public class Banco {
         System.out.println("No existe ese cliente.");
         return null;
     }
-    public Cliente seleccionarClienteporUsuario() {
-        System.out.print("Usuario Cliente: ");
-        String usuario = sc.nextLine();
-
+    public Cliente seleccionarClientePorUsuario(String usuario) {
         for (Cliente c : clientes)
             if (c.getUsuario().equals(usuario))
                 return c;
@@ -84,7 +82,7 @@ public class Banco {
         System.out.println("Empleado registrado correctamente.");
     }
 
-    public Empleado seleccionarEmpleadoporID() {
+    public Empleado seleccionarEmpleadoPorID() {
         listarEmpleados();
         System.out.print("ID Empleado: ");
         String id = sc.nextLine();
@@ -96,10 +94,8 @@ public class Banco {
         System.out.println("No existe ese empleado.");
         return null;
     }
-    public Empleado seleccionarEmpleadoporUsuario() {
-        System.out.print("Usuario Empleado: ");
-        String usuario = sc.nextLine();
 
+    public Empleado seleccionarEmpleadoPorUsuario(String usuario) {
         for (Empleado e : empleados)
             if (e.getUsuario().equals(usuario))
                 return e;
@@ -108,58 +104,59 @@ public class Banco {
         return null;
     }
 
-    public void crearCuentaDesdeTeclado() {
-        Cliente titular = seleccionarClienteporUsuario();
+    public Administrador seleccionarAdministradorPorUsuario(String usuario) {
+        for (Administrador a : administradores)
+            if (a.getUsuario().equals(usuario))
+                return a;
+
+        System.out.println("No existe ese administrador.");
+        return null;
+    }
+
+    public void crearCuentaDesdeTeclado(Trabajador trabajador) {
+          ArrayList<Cliente> titulares = new ArrayList<>();
+      while (true) {
+      System.out.println("Desea crear una cuenta mancomunada? (s/n)");
+      char op = sc.nextLine().toUpperCase().charAt(0);
+      if (op == 'N') {
+        Cliente titular = seleccionarClientePorID();
         if (titular == null) return;
 
-        /*    public void crearCuentaDesdeTeclado() {
-        Cliente titular = seleccionarCliente();
-        if (titular == null) return; */
-
-        System.out.print("Saldo inicial: ");
-        float saldo = leerFloat();
-
-        ArrayList<Cliente> titulares = new ArrayList<>();
         titulares.add(titular);
+        break;
+      }
+      else if (op == 'S') {
+        while (true) {
+          Cliente titular = seleccionarClientePorID();
+          if (titular == null) continue;
 
-        Cuenta cuenta = crearCuenta(titulares, saldo);
+          titulares.add(titular);
+          System.out.println("Desea seguir ingresando titulares? (S/n)");
+          char op2 = sc.nextLine().toUpperCase().charAt(0);
+          if (op == 'N') break;
+        }
+        break;
+      }
+      }
+
+        int numero = cuentas.size()+1;
+
+        Cuenta cuenta = trabajador.crearCuenta(titulares, numero);
+        for (Cliente titular : titulares) {
         titular.agregarCuenta(cuenta);
+        }
+        cuentas.add(cuenta);
 
         System.out.println("Cuenta creada con número: " + cuenta.getNumero());
     }
 
-    public Cuenta crearCuenta(ArrayList<Cliente> titulares, float saldoInicial) {
-        String numero = "C" + (cuentas.size() + 1);
-        Cuenta c = new Cuenta(numero, "Ahorros", saldoInicial, titulares);
-        cuentas.add(c);
-        return c;
-    }
+    public void operaciones(Trabajador trabajador) {
 
-    public Cuenta seleccionarCuenta(Cliente cli) {
-        System.out.println("\n--- CUENTAS DE " + cli.getNombre() + " ---");
-        for (Cuenta c : cli.getCuentas()) {
-            System.out.println(c.getNumero() + " - Saldo: S/ " + c.getSaldo());
-        }
-
-        System.out.print("Número de cuenta: ");
-        String num = sc.nextLine();
-
-        for (Cuenta c : cli.getCuentas())
-            if (c.getNumero().equals(num))
-                return c;
-
-        System.out.println("No existe esa cuenta.");
-        return null;
-    }
-
-    public void operaciones(Empleado emp) {
-
-        Cliente cli = seleccionarClienteporUsuario();
+        Cliente cli = seleccionarClientePorID();
         if (cli == null) return;
 
-        /*Cliente cli = seleccionarCliente();
-        if (cli == null) return; */
-        Cuenta cuenta = seleccionarCuenta(cli);
+        cli.mostrarResumenCuentas();
+        Cuenta cuenta = cli.seleccionarCuenta();
         if (cuenta == null) return;
 
         int op;
@@ -181,14 +178,14 @@ public class Banco {
                 case 2 -> {
                     System.out.print("Monto depósito: ");
                     float m = leerFloat();
-                    Deposito d = emp.registrarDeposito(cuenta, m, cli);
+                    Deposito d = trabajador.registrarDeposito(cuenta, m, cli);
                     d.procesar();
                 }
 
                 case 3 -> {
                     System.out.print("Monto retiro: ");
                     float m = leerFloat();
-                    Retiro r = emp.registrarRetiro(cuenta, m, cli);
+                    Retiro r = trabajador.registrarRetiro(cuenta, m, cli);
                     r.procesar();
                 }
 
@@ -199,53 +196,75 @@ public class Banco {
     }
 
     public void mostrarResumenCuenta(Cliente cli) {
-
-        if (cli.getCuentas().isEmpty()) {
-            System.out.println("El cliente no tiene cuentas registradas.");
-            return;
-        }
-
-        Cuenta cuenta = seleccionarCuenta(cli);
+        if(cli.mostrarResumenCuentas()) return;
+        Cuenta cuenta = cli.seleccionarCuenta();
         if (cuenta == null) return;
 
         cuenta.mostrarResumen();
     }
 
     public void filtrarMovimientos(Cliente cli) {
-
-        if (cli.getCuentas().isEmpty()) {
-            System.out.println("El cliente no tiene cuentas registradas.");
-            return;
-        }
-
-        Cuenta cuenta = seleccionarCuenta(cli);
+        if(cli.mostrarResumenCuentas()) return;
+        Cuenta cuenta = cli.seleccionarCuenta();
         if (cuenta == null) return;
 
         cuenta.filtrarMovimientos();
     }
 
+    public void menuAdministrador() {
+      System.out.println("Por favor digite su usuario");
+      String usuario = sc.nextLine();
+      Administrador administradorLogueado = seleccionarAdministradorPorUsuario(usuario);
+      if (administradorLogueado == null) return;
+
+      System.out.println("Por favor digite su contraseña");
+      String contraseña = sc.nextLine();
+      if(!(administradorLogueado.login(usuario, contraseña))) return;
+
+        int op;
+        do {
+            System.out.println("\n--- MENÚ ADMINISTRADOR(" + administradorLogueado.getNombre() + ") ---");
+            System.out.println("1. Listar clientes");
+            System.out.println("2. Registrar cliente");
+            System.out.println("3. Crear cuenta");
+            System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
+            System.out.println("5. Volver al menú principal");
+            System.out.println("6. Contratar Empleado");
+            System.out.println("7. Despedir Empleado");
+            System.out.print("Opción: ");
+
+            op = leerInt();
+
+            switch (op) {
+                case 1 -> listarClientes();
+                case 2 -> registrarCliente(administradorLogueado);
+                case 3 -> crearCuentaDesdeTeclado(administradorLogueado);
+                case 4 -> operaciones(administradorLogueado);
+                case 5 -> System.out.println("Volviendo...");
+                default -> System.out.println(" Opción inválida.");
+            }
+        } while (op != 5);
+
+    }
+
     public void menuTrabajador() {
-        Empleado empleadoLogueado = seleccionarEmpleadoporUsuario();
-        /*Empleado empleadoLogueado = seleccionarEmpleado(); */
-        if (empleadoLogueado == null) return;
         System.out.println("Por favor digite su usuario");
         String usuario = sc.nextLine();
+        Empleado empleadoLogueado = seleccionarEmpleadoPorUsuario(usuario);
+        if (empleadoLogueado == null) return;
         
-         System.out.println("Por favor digite su contraseña");
+        System.out.println("Por favor digite su contraseña");
         String contraseña = sc.nextLine();
-        if(!(empleadoLogueado.login(usuario, contraseña))){
-            return;
-        }
+        if(!(empleadoLogueado.login(usuario, contraseña))) return;
+        
         int op;
         do {
             System.out.println("\n--- MENÚ TRABAJADOR (" + empleadoLogueado.getNombre() + ") ---");
             System.out.println("1. Listar clientes");
             System.out.println("2. Registrar cliente");
-            System.out.println("3. Listar empleados");
-            System.out.println("4. Registrar empleado");
-            System.out.println("5. Crear cuenta");
-            System.out.println("6. Realizar Operaciones Bancarias (Depósito/Retiro)");
-            System.out.println("7. Volver al menú principal");
+            System.out.println("3. Crear cuenta");
+            System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
+            System.out.println("5. Volver al menú principal");
             System.out.print("Opción: ");
 
             op = leerInt();
@@ -253,22 +272,21 @@ public class Banco {
             switch (op) {
                 case 1 -> listarClientes();
                 case 2 -> registrarCliente(empleadoLogueado);
-                case 3 -> listarEmpleados();
-                case 4 -> registrarEmpleadoDesdeTeclado();
-                case 5 -> crearCuentaDesdeTeclado();
-                case 6 -> operaciones(empleadoLogueado);
-                case 7 -> System.out.println("Volviendo...");
+                case 3 -> crearCuentaDesdeTeclado(empleadoLogueado);
+                case 4 -> operaciones(empleadoLogueado);
+                case 5 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
-        } while (op != 7);
+        } while (op != 5);
     }
 
     public void menuCliente() {
-        Cliente clienteLogueado = seleccionarClienteporUsuario();
-        /*Cliente clienteLogueado = seleccionarCliente(); */
-        if (clienteLogueado == null) return;
         System.out.println("Por favor digite su usuario");
         String usuario = sc.nextLine();
+
+        Cliente clienteLogueado = seleccionarClientePorUsuario(usuario);
+        if (clienteLogueado == null) return;
+
         System.out.println("Por favor digite su contraseña");
         String contraseña = sc.nextLine();
         
