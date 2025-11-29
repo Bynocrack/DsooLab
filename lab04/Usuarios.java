@@ -1,7 +1,7 @@
 // Importamos las librerias necesarias
 import java.util.*;
 
-public class Usuario {
+public class Usuarios {
   // Declaramos el scanner asi como las propiedades que corresponden a cada usuario
   private Scanner sc = new Scanner(System.in);
   private String id;
@@ -9,14 +9,14 @@ public class Usuario {
   private ArrayList<Libro> librosPrestados;
 
   // Primer constructor, en caso se desee crear algun usuario estatico, es decir, que siempre este presente en el sistema
-  public Usuario (String id, String nombre, ArrayList<Libro> historial) {
+  public Usuarios (String id, String nombre, ArrayList<Libro> historial) {
     setNombre(nombre);
     setId(id);
     setLibrosPrestados(historial);
   }
 
   // Constructor sobrecargado, para crear nuevos usuarios durante ejecucion del sistema
-  public Usuario () {
+  public Usuarios () {
     // Solicitamos nombre para el usuario
     System.out.print("Digite el nombre del nuevo usuario: ");
     String nombre = sc.nextLine();

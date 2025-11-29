@@ -1,18 +1,16 @@
 import java.util.ArrayList;
 
-public class Cliente extends Persona {
+public class Cliente extends Usuario {
 
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
-    private String contraseña;
 
     public Cliente(String dni, String nombre, String direccion,
-                   String telefono, String email, String idCliente, String contraseña) {
+                   String telefono, String email, String usuario, String contraseña) {
 
-        super(dni, nombre, direccion, telefono, email);
-        this.idCliente = idCliente;
+        super(dni, nombre, direccion, telefono, email, usuario, contraseña);
+        this.idCliente = "CL" + dni;
         this.cuentas = new ArrayList<>();
-        this.contraseña = contraseña;
     }
 
     public void agregarCuenta(Cuenta cuenta) {
@@ -21,14 +19,6 @@ public class Cliente extends Persona {
 
     public ArrayList<Cuenta> getCuentas() {
         return cuentas;
-    }
-    public boolean autenticar(String intento) {
-        if(intento.equals(contraseña)){
-            return true;
-        }
-        else {
-            return false;
-        }
     }
 
     public String getIdCliente() { return idCliente; }
@@ -43,5 +33,14 @@ public class Cliente extends Persona {
         for (Cuenta c : cuentas) {
             System.out.println(c.getNumero() + " - Saldo: S/ " + c.getSaldo());
         }
+    }
+    @Override
+    public void mostrarPermisos() {
+        System.out.println("\n================================");
+        System.out.println(" PERMISOS DEL CLIENTE: ");
+        System.out.println("\n================================");
+        System.out.println("SI Consultar resumen de sus cuentas");
+        System.out.println("SI Ver movimientos de sus cuentas");
+        System.out.println("SI Consultar saldo total");
     }
 }

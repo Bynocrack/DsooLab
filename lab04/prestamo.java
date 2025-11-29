@@ -2,12 +2,12 @@ import java.time.LocalDate;
 
 public class Prestamo {
     Libro libro;
-    Usuario usuario;
+    Usuarios usuario;
     LocalDate fechaPrestamo;
 
     
     // Constructor fecha 
-    public Prestamo(Libro libro, Usuario usuario, LocalDate fechaPrestamo) {
+    public Prestamo(Libro libro, Usuarios usuario, LocalDate fechaPrestamo) {
         this.libro = libro;
         this.usuario = usuario;
         this.fechaPrestamo = fechaPrestamo;
@@ -18,7 +18,7 @@ public class Prestamo {
         return libro;
     }
 
-    public Usuario getUsuario() {
+    public Usuarios getUsuario() {
         return usuario;
     }
 
@@ -31,7 +31,7 @@ public class Prestamo {
         this.libro = libro;
     }
 
-    public void setUsuario(Usuario usuario) {
+    public void setUsuario(Usuarios usuario) {
         this.usuario = usuario;
     }
 

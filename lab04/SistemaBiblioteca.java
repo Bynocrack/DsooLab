@@ -8,8 +8,8 @@ public class SistemaBiblioteca {
         // Datos inicializados
         biblioteca.getCatalogo().add(new Libro("Cien años de soledad", "García", 1001, true));
         biblioteca.getCatalogo().add(new Libro("El principito", "Exupery", 1002, true));
-        biblioteca.getUsuarios().add(new Usuario("U01", "Jose", new ArrayList<>()));
-        biblioteca.getUsuarios().add(new Usuario("U02", "Maria", new ArrayList<>()));
+        biblioteca.getUsuarios().add(new Usuarios("U01", "Jose", new ArrayList<>()));
+        biblioteca.getUsuarios().add(new Usuarios("U02", "Maria", new ArrayList<>()));
         
         //Menú de opciones, el bucle continúa hasta que el usuario elige la opción Salir
         int opcion;
