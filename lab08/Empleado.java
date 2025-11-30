@@ -1,6 +1,9 @@
-public class Empleado extends Trabajador {
+public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajador
+
+    // Atributo de la clase empleado
     private String idEmpleado;
 
+    // Constructor de la clase Empleado
     public Empleado(String dni, String nombre, String direccion, String telefono, String email,
                     String usuario, String contraseña) {
 
@@ -8,9 +11,11 @@ public class Empleado extends Trabajador {
         this.idEmpleado = "EM" + dni;
     }
 
+    // Método getter
     public String getIdEmpleado() { return idEmpleado; }
 
     @Override
+    // Método para mostrar los permisos del empleado
     public void mostrarPermisos() {
         System.out.println("\n================================");
         System.out.println(" PERMISOS DEL EMPLEADO: ");
