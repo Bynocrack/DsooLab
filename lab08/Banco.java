@@ -52,31 +52,8 @@ public class Banco {
         }
     }
 
-    public void registrarEmpleadoDesdeTeclado() {
-        System.out.println("\n--- REGISTRAR EMPLEADO ---");
-
-        System.out.print("DNI: ");
-        String dni = sc.nextLine();
-
-        System.out.print("Nombre: ");
-        String nombre = sc.nextLine();
-
-        System.out.print("Dirección: ");
-        String direccion = sc.nextLine();
-
-        System.out.print("Teléfono: ");
-        String telefono = sc.nextLine();
-
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-
-        System.out.print("Usuario: ");
-        String usuario = sc.nextLine();
-
-        System.out.print("Contraseña Empleado: ");
-        String contraseña = sc.nextLine();
-
-        Empleado nuevo = new Empleado(dni, nombre, direccion, telefono, email, usuario, contraseña);
+    public void registrarEmpleado(Administrador administrador) {
+        Empleado nuevo = administrador.registrarEmpleadoDesdeTeclado();
         empleados.add(nuevo);
 
         System.out.println("Empleado registrado correctamente.");
@@ -228,9 +205,11 @@ public class Banco {
             System.out.println("2. Registrar cliente");
             System.out.println("3. Crear cuenta");
             System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
-            System.out.println("5. Volver al menú principal");
-            System.out.println("6. Contratar Empleado");
-            System.out.println("7. Despedir Empleado");
+            System.out.println("5. Contratar Empleado");
+            System.out.println("6. Despedir Empleado");
+            System.out.println("7. Ver permisos del administrador");
+            System.out.println("8. Listar empleados");
+            System.out.println("9. Volver al menú principal");
             System.out.print("Opción: ");
 
             op = leerInt();
@@ -240,14 +219,18 @@ public class Banco {
                 case 2 -> registrarCliente(administradorLogueado);
                 case 3 -> crearCuentaDesdeTeclado(administradorLogueado);
                 case 4 -> operaciones(administradorLogueado);
-                case 5 -> System.out.println("Volviendo...");
+                case 5 -> registrarEmpleado(administradorLogueado);
+                case 6 -> administradorLogueado.despedirEmpleado(this);
+                case 7 -> administradorLogueado.mostrarPermisos();
+                case 8 -> listarEmpleados();
+                case 9 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
-        } while (op != 5);
+        } while (op != 9);
 
     }
 
-    public void menuTrabajador() {
+    public void menuEmpleado() {
         System.out.println("Por favor digite su usuario");
         String usuario = sc.nextLine();
         Empleado empleadoLogueado = seleccionarEmpleadoPorUsuario(usuario);
@@ -259,12 +242,13 @@ public class Banco {
         
         int op;
         do {
-            System.out.println("\n--- MENÚ TRABAJADOR (" + empleadoLogueado.getNombre() + ") ---");
+            System.out.println("\n--- MENÚ EMPLEADO (" + empleadoLogueado.getNombre() + ") ---");
             System.out.println("1. Listar clientes");
             System.out.println("2. Registrar cliente");
             System.out.println("3. Crear cuenta");
             System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
-            System.out.println("5. Volver al menú principal");
+            System.out.println("5. Ver permisos del empleado");
+            System.out.println("6. Volver al menú principal");
             System.out.print("Opción: ");
 
             op = leerInt();
@@ -274,10 +258,11 @@ public class Banco {
                 case 2 -> registrarCliente(empleadoLogueado);
                 case 3 -> crearCuentaDesdeTeclado(empleadoLogueado);
                 case 4 -> operaciones(empleadoLogueado);
-                case 5 -> System.out.println("Volviendo...");
+                case 5 -> empleadoLogueado.mostrarPermisos();
+                case 6 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
-        } while (op != 5);
+        } while (op != 6);
     }
 
     public void menuCliente() {
@@ -299,6 +284,7 @@ public class Banco {
             System.out.println("1. Consultar resumen de cuentas");
             System.out.println("2. Ver/Filtrar movimientos de una cuenta");
             System.out.println("3. Volver al menú principal");
+            System.out.println("4. Ver permisos del cliente");
             System.out.print("Opción: ");
 
             op = leerInt();
@@ -307,6 +293,7 @@ public class Banco {
                 case 1 -> mostrarResumenCuenta(clienteLogueado);
                 case 2 -> filtrarMovimientos(clienteLogueado);
                 case 3 -> System.out.println("Volviendo...");
+                case 4 -> clienteLogueado.mostrarPermisos();    
                 default -> System.out.println(" Opción inválida.");
             }
         } while (op != 3);

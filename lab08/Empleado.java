@@ -1,7 +1,5 @@
-import java.util.*;
 public class Empleado extends Trabajador {
     private String idEmpleado;
-    private Scanner sc = new Scanner(System.in);
 
     public Empleado(String dni, String nombre, String direccion, String telefono, String email,
                     String usuario, String contraseña) {
