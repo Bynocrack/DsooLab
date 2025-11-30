@@ -9,7 +9,7 @@ public  class Usuario extends Persona {
     super(dni, nombre, direccion, telefono, email);
     this.usuario = usuario;
     this.contraseña = contraseña;
-    this.estado = "INACTIVO"; // ???????????
+    this.estado = "INACTIVO"; 
     }
 
     public String getUsuario() { return usuario; }
