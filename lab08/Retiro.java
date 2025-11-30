@@ -2,12 +2,12 @@ import java.time.LocalDateTime;
 
 public class Retiro extends Transaccion {
 
-    public Retiro(Cuenta cuenta, float monto, Cliente cliente, Empleado empleado) {
+    public Retiro(Cuenta cuenta, float monto, Cliente cliente, Usuario encargado) {
         super("R-" + System.currentTimeMillis(),
                 LocalDateTime.now(),
                 monto,
-                true,
-                empleado,
+                (encargado instanceof Empleado) ? true : false,
+                encargado,
                 cuenta,
                 cliente,
                 null);

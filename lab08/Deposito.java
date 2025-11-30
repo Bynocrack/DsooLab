@@ -2,12 +2,12 @@ import java.time.LocalDateTime;
 
 public class Deposito extends Transaccion {
 
-    public Deposito(Cuenta cuenta, float monto, Cliente cliente, Empleado empleado) {
+    public Deposito(Cuenta cuenta, float monto, Cliente cliente, Usuario encargado) {
         super("D-" + System.currentTimeMillis(),
                 LocalDateTime.now(),
                 monto,
                 true,
-                empleado,
+                encargado,
                 cuenta,
                 cliente,
                 null);

@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Cliente extends Usuario {
 
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
+    private Scanner sc = new Scanner(System.in);
 
     public Cliente(String dni, String nombre, String direccion,
                    String telefono, String email, String usuario, String contraseña) {
@@ -28,11 +30,27 @@ public class Cliente extends Usuario {
         for (Cuenta c : cuentas) total += c.getSaldo();
         return Math.round(total * 100) / 100f;
     }
-    public void mostrarResumenCuentas() {
+    public Cuenta seleccionarCuenta() {
+        System.out.print("Número de cuenta: ");
+        String num = sc.nextLine();
+
+        for (Cuenta c : cuentas)
+            if (c.getNumero().equals(num))
+                return c;
+
+        System.out.println("No existe esa cuenta.");
+        return null;
+    }
+    public boolean mostrarResumenCuentas() {
+      if(cuentas.isEmpty()) {
+        System.out.println("El cliente no tiene cuentas registradas");
+        return false;
+      }
         System.out.println("\n--- CUENTAS DEL CLIENTE " + nombre + " ---");
         for (Cuenta c : cuentas) {
             System.out.println(c.getNumero() + " - Saldo: S/ " + c.getSaldo());
         }
+        return true;
     }
     @Override
     public void mostrarPermisos() {
