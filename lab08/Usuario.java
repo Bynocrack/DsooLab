@@ -32,16 +32,6 @@ public  class Usuario extends Persona {
         }
     }
 
-    /* 
-    public boolean autenticar(String intento) {
-        if(intento.equals(contraseña)){
-            return true;
-        }
-        else {
-            return false;
-        }
-    }*/
-
     public void mostrarDatos() {
         System.out.println("\n--- DATOS DEL USUARIO ---");
         System.out.println("Nombre del Usuario: " + usuario);
