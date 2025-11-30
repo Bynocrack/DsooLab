@@ -188,6 +188,72 @@ public class Banco {
         cuenta.filtrarMovimientos();
     }
 
+    public void menuMostrarDatos() {
+        System.out.println("\n--- MOSTRAR DATOS DEL USUARIO ---");
+        System.out.println("1. Administradores");
+        System.out.println("2. Empleados");
+        System.out.println("3. Clientes");
+        System.out.println("0. Regresar");
+        System.out.print("Opción: ");
+        int op = leerInt();
+        switch (op) {
+            case 1 -> {
+                System.out.println("\n--- LISTA DE ADMINISTRADORES ---");
+                for (Administrador a : administradores) {
+                    System.out.println(a.getIdAdministrador()+" - " + a.getNombre());
+                }
+                System.out.println("Ingrese la ID del administrador: ");
+                    String id = sc.nextLine();
+                for (Administrador a : administradores) {
+                    if (a.getIdAdministrador().equals(id)) {
+                        System.out.println("Admninistrador seleccionado: " + a.getNombre());
+                        a.mostrarDatos();
+                        return;
+                    }
+                }
+                System.out.println("No existe ese administrador.");
+
+            }
+            case 2 -> {
+                System.out.println("\n--- LISTA DE EMPLEADOS ---");
+                for (Empleado e : empleados) {
+                    System.out.println(e.getIdEmpleado()+" - " + e.getNombre());
+                }
+                System.out.println("Ingrese la ID del empleado: ");
+                    String id = sc.nextLine();
+                for (Empleado e : empleados) {
+                    if (e.getIdEmpleado().equals(id)) {
+                        System.out.println("Empleado seleccionado: " + e.getNombre());
+                        e.mostrarDatos();
+                        return;
+                    }
+                }
+                System.out.println("No existe ese empleado.");
+            }
+            case 3 -> {
+                System.out.println("\n--- LISTA DE CLIENTES ---");
+                for (Cliente c : clientes) {
+                    System.out.println(c.getIdCliente()+" - " + c.getNombre());
+                }
+                System.out.println("Ingrese la ID del cliente: ");
+                    String id = sc.nextLine();
+                for (Cliente c : clientes) {
+                    if (c.getIdCliente().equals(id)) {
+                        System.out.println("Cliente seleccionado: " + c.getNombre());
+                        c.mostrarDatos();
+                        return;
+                    }
+                }
+                System.out.println("No existe ese cliente.");
+            }
+            case 0 -> {
+                System.out.println("Regresando...");
+            }
+            default -> System.out.println(" Opción inválida.");
+        }
+       
+    }
+
     public void menuAdministrador() {
       System.out.println("Por favor digite su usuario");
       String usuario = sc.nextLine();
@@ -209,7 +275,8 @@ public class Banco {
             System.out.println("6. Despedir Empleado");
             System.out.println("7. Ver permisos del administrador");
             System.out.println("8. Listar empleados");
-            System.out.println("9. Volver al menú principal");
+            System.out.println("9. Mostrar datos de un usuario(Administrador/Empleado/Cliente)");
+            System.out.println("0. Volver al menú principal");
             System.out.print("Opción: ");
 
             op = leerInt();
@@ -223,10 +290,11 @@ public class Banco {
                 case 6 -> administradorLogueado.despedirEmpleado(this);
                 case 7 -> administradorLogueado.mostrarPermisos();
                 case 8 -> listarEmpleados();
-                case 9 -> System.out.println("Volviendo...");
+                case 9 -> menuMostrarDatos();
+                case 0 -> System.out.println("Volviendo...");
                 default -> System.out.println(" Opción inválida.");
             }
-        } while (op != 9);
+        } while (op != 0);
 
     }
 
