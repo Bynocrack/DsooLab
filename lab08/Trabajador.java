@@ -1,13 +1,15 @@
 import java.util.*;
-public class Trabajador extends Usuario {
+public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
     private Scanner sc = new Scanner(System.in);
 
+    // Constructor de la clase Trabajador
     public Trabajador(String dni, String nombre, String direccion, String telefono, String email,
                     String usuario, String contraseña) {
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
     }
 
+    //Metodo para registrar depositos y retiros
     public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) {
         return new Deposito(cuenta, monto, cliente, this);
     }
@@ -16,6 +18,7 @@ public class Trabajador extends Usuario {
         return new Retiro(cuenta, monto, cliente, this);
     }
 
+    //Metodo para registrar nuevos clientes
     public Cliente registrarClienteDesdeTeclado() {
         System.out.println("\n--- REGISTRAR CLIENTE ---");
 
@@ -40,13 +43,16 @@ public class Trabajador extends Usuario {
         System.out.println("Contraseña Usuario: ");
         String contraseña = sc.nextLine();
 
-        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, usuario, contraseña);
+        //Crea y retorna el nuevo cliente creado
+        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, usuario, contraseña); 
         return nuevo;
     }
 
+    //Metodo para crear nuevas cuentas
     public Cuenta crearCuenta(ArrayList<Cliente> titulares, int numero) {
         System.out.print("Saldo inicial: ");
 
+        //Validar monto inicial
         while (!sc.hasNextFloat()) {
             sc.next();
             System.out.print("Monto inválido: ");
@@ -54,8 +60,8 @@ public class Trabajador extends Usuario {
         float saldo = sc.nextFloat();
         sc.nextLine();
 
-        String codigo = "C" + numero;
-        Cuenta c = new Cuenta(codigo, "Ahorros", saldo, titulares);
+        String codigo = "C" + numero; //Genera el codigo de la cuenta
+        Cuenta c = new Cuenta(codigo, "Ahorros", saldo, titulares); //Crea la cuenta
         return c;
     }
 }

@@ -1,16 +1,21 @@
 import java.util.*;
-public class Administrador extends Trabajador{
+public class Administrador extends Trabajador{ // Clase Administrador hereda de Trabajador
+
+    // Atributos de la clase Administrador
     private String idAdministrador;
     private Scanner sc = new Scanner(System.in);
 
+    // Constructor de la clase Administrador
     public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario, String contraseña) {
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idAdministrador = "AD" + dni;
     }
 
+    // Método getter 
     public String getIdAdministrador() { return idAdministrador; }
 
+    // Método para contratar a un nuevo empleado
     public Empleado registrarEmpleadoDesdeTeclado() {
         System.out.println("\n--- REGISTRAR EMPLEADO ---");
 
@@ -39,6 +44,7 @@ public class Administrador extends Trabajador{
         return nuevo;
     }
 
+    // Método para despedir a un empleado
     public void despedirEmpleado(Banco banco) {
         System.out.println("Ingrese el empleado a despedir:");
         Empleado emp = banco.seleccionarEmpleadoPorID();
@@ -48,7 +54,9 @@ public class Administrador extends Trabajador{
             System.out.println("Empleado no encontrado en la lista.");
         }
     }
+
     @Override
+    // Método para mostrar los permisos del administrador
     public void mostrarPermisos() {
         System.out.println("\n================================");
         System.out.println(" PERMISOS DEL ADMINISTRADOR: ");
@@ -60,5 +68,4 @@ public class Administrador extends Trabajador{
         System.out.println("SI Registrar nuevos clientes");
         System.out.println("SI Contratar y despedir empleados");
     }
-
 }

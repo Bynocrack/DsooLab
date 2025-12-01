@@ -8,6 +8,7 @@ public class Main {
 
         Banco banco = new Banco();
 
+        // Se agregan datos iniciales (1 empleado, 1 cliente y 1 administrador)
         Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","DegoX", "Camargo");
         banco.empleados.add(emp);
 
@@ -20,6 +21,7 @@ public class Main {
         int op;
 
         do {
+            // Menú principal del sistema
             System.out.println("\n===============================");
             System.out.println(" BIENVENIDO A BANCO CHANCHITO");
             System.out.println("===============================");
@@ -30,9 +32,13 @@ public class Main {
             System.out.print("Opción: ");
 
             try {
+                // Se lee la opción del usuario
                 op = sc.nextInt();
+
             } catch (InputMismatchException e) {
+                // Si ingresa algo diferente de un número, se marca como inválido
                 op = -1; 
+
             }
             sc.nextLine();
 
@@ -41,14 +47,14 @@ public class Main {
                 case 1 -> banco.menuAdministrador();
                 case 2 -> banco.menuEmpleado();
                 case 3 -> banco.menuCliente();
-
+                
                 case 0 -> {
                     System.out.println("Saliendo...");
                     System.out.println("Gracias por usar Banco Chanchito :D . ¡Hasta luego!");
                 }
                 default -> System.out.println(" Opción inválida.");
             }
-
-        } while (op != 0);
+        } while (op != 0); // Repite hasta que se elija salir
+        
     }
 }

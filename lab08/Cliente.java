@@ -1,12 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Cliente extends Usuario {
+public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
 
+    // Atributos de la clase Cliente
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
     private Scanner sc = new Scanner(System.in);
 
+    // Constructor de la clase Cliente
     public Cliente(String dni, String nombre, String direccion,
                    String telefono, String email, String usuario, String contraseña) {
 
@@ -15,21 +17,25 @@ public class Cliente extends Usuario {
         this.cuentas = new ArrayList<>();
     }
 
+    // Método para agregar una cuenta al cliente
     public void agregarCuenta(Cuenta cuenta) {
         cuentas.add(cuenta);
     }
 
+    // Método para obtener la lista de cuentas del cliente
     public ArrayList<Cuenta> getCuentas() {
         return cuentas;
     }
 
+    // Métodos getters
     public String getIdCliente() { return idCliente; }
-
     public float getSaldoTotal() {
         float total = 0;
-        for (Cuenta c : cuentas) total += c.getSaldo();
-        return Math.round(total * 100) / 100f;
+            for (Cuenta c : cuentas) total += c.getSaldo();
+                return Math.round(total * 100) / 100f;
     }
+
+    // Método para seleccionar una cuenta del cliente
     public Cuenta seleccionarCuenta() {
         System.out.print("Número de cuenta: ");
         String num = sc.nextLine();
@@ -41,6 +47,8 @@ public class Cliente extends Usuario {
         System.out.println("No existe esa cuenta.");
         return null;
     }
+
+    // Método para mostrar el resumen de cuentas del cliente
     public boolean mostrarResumenCuentas() {
       if(cuentas.isEmpty()) {
         System.out.println("El cliente no tiene cuentas registradas");
@@ -53,6 +61,8 @@ public class Cliente extends Usuario {
         return true;
     }
     @Override
+
+    // Método para mostrar los permisos del cliente
     public void mostrarPermisos() {
         System.out.println("\n================================");
         System.out.println(" PERMISOS DEL CLIENTE: ");
