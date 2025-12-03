@@ -131,7 +131,7 @@ public class Login extends javax.swing.JFrame {
                         char[] claveString = ClaveField.getPassword();
                         String clave = new String(claveString);
                         administradorLogueado.login(usuario, clave);
-                        MenuAdministrador MA = new MenuAdminsitrador(banco, administradorLogueado);
+                        MenuAdministrador MA = new MenuAdministrador(banco, administradorLogueado);
                         MA.setLocationRelativeTo(this);
                         MA.setVisible(true);
                         this.dispose();
