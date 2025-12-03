@@ -17,6 +17,9 @@ public class MenuEmpleado extends javax.swing.JFrame {
     /**
      * Creates new form MenuEmpleado
      */
+    public MenuEmpleado() {
+        initComponents();
+    }
     public MenuEmpleado(Banco banco, Empleado empleado) {
         this.banco = banco;
         this.empleado = empleado;

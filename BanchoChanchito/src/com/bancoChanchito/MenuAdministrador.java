@@ -17,6 +17,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
     /**
      * Creates new form MenuAdministrador
      */
+    public MenuAdministrador() {
+        initComponents();
+    }
     public MenuAdministrador(Banco banco, Administrador administrador) {
         this.banco = banco;
         this.administrador = administrador;

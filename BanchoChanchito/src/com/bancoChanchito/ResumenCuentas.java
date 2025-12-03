@@ -20,6 +20,9 @@ public class ResumenCuentas extends javax.swing.JFrame {
     /**
      * Creates new form ResumenCuentas
      */
+    public ResumenCuentas() {
+        initComponents();
+    }
     public ResumenCuentas(Banco banco, Cliente cliente) {
         this.cliente = cliente;
         this.banco = banco;

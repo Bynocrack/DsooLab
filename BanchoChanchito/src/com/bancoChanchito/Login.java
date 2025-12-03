@@ -18,6 +18,9 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form LoginCliente
      */
+    public Login() {
+        initComponents();
+    }
     public Login(Banco banco, String tipo) {
         this.tipo = tipo;
         this.banco = banco;

@@ -18,6 +18,9 @@ public class MenuCliente extends javax.swing.JFrame {
     /**
      * Creates new form MenuCliente
      */
+    public MenuCliente() {
+        initComponents();
+    }
     public MenuCliente(Banco banco, Cliente cliente) {
         this.cliente = cliente;
         this.banco = banco;
