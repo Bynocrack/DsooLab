@@ -66,15 +66,14 @@ public class Cuenta {
     }
 
     // Método para mostrar los movimientos de la cuenta
-    public String mostrarMovimientos() {
+    public ArrayList<String> mostrarMovimientos() {
+        ArrayList<String> out = new ArrayList<>();
         if (movimientos.isEmpty()) {
-            return "No hay movimientos.";
+            out.add("No hay movimientos.");
         }
-        
-        String out = "";
 
         for (Transaccion t : movimientos) {
-            out += (t.getResumen() + "\n----------------");
+            out.add(((t instanceof Retiro) ? "Retiro: " : "Deposito: ") + t.getMonto());
         }
         
         return out;
@@ -90,24 +89,20 @@ public class Cuenta {
         for (Cliente c : titulares) {
             out += "\n - " + c.getNombre();
         }
-
-        out += "\n" + mostrarMovimientos();
         return out;
     }
 
     // Método para filtrar y mostrar movimientos de la cuenta
-    public void filtrarMovimientos() {
-        System.out.println("\n1. Solo depósitos");
-        System.out.println("2. Solo retiros");
-        System.out.print("Opción: ");
-        int op = sc.nextInt();
+    public ArrayList<String> filtrarMovimientos(char tipo) {
+        ArrayList<String> out = new ArrayList<>();
 
         for (Transaccion t : movimientos) {
-            if (op == 1 && t instanceof Deposito)
-                System.out.println(t.getResumen());
-            if (op == 2 && t instanceof Retiro)
-                System.out.println(t.getResumen());
+            if (tipo == 'D' && t instanceof Deposito)
+                out.add(t.getFechaHora() + " --- " + t.getMonto());
+            if (tipo == 'R' && t instanceof Retiro)
+                out.add(t.getFechaHora() + " --- " + t.getMonto());
         }
+        return out;
     }
 
 }

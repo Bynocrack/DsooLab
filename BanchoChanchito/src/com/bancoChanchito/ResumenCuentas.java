@@ -146,8 +146,9 @@ public class ResumenCuentas extends javax.swing.JFrame {
             this.dispose();
             
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "No se encontro esa cuenta", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_BuscarMouseClicked
 
     private void cargarCuentas() {

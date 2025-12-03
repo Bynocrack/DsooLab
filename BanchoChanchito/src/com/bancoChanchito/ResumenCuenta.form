@@ -117,11 +117,17 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Filtrar por Retiros"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RetirosMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Todo">
       <Properties>
         <Property name="text" type="java.lang.String" value="Mostrar todo"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="TodoMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Volver">
       <Properties>
