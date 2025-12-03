@@ -202,7 +202,7 @@ public class Banco {
                 if (a.getUsuario().equals(usuario))
                     return a;
 
-            throw new Exception("Administrador no ecnontrado");
+            throw new Exception("Administrador no encontrado");
         }
         
         // Método para el menú del administrador
