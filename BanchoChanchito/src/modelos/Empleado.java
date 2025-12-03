@@ -7,7 +7,7 @@ public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajado
 
     // Constructor de la clase Empleado
     public Empleado(String dni, String nombre, String direccion, String telefono, String email,
-                    String usuario, String contraseña) {
+                    String usuario, String contraseña) throws Exception{
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idEmpleado = "EM" + dni;

@@ -12,7 +12,7 @@ public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
 
     // Constructor de la clase Cliente
     public Cliente(String dni, String nombre, String direccion,
-                   String telefono, String email, String usuario, String contraseña) {
+                   String telefono, String email, String usuario, String contraseña) throws Exception{
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idCliente = "CL" + dni;
