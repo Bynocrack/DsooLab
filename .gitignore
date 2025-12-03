@@ -1,2 +1,5 @@
 # Ignora las clases (Solo las ya compiladas)
 *.class
+nbproject/private/
+build/
+dist/
