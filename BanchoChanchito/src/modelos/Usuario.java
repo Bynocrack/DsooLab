@@ -38,15 +38,15 @@ public  class Usuario extends Persona { // Clase Usuario hereda de Persona
     }
 
     // Método para mostrar los datos del usuario (Administrador, Empleado, Cliente)
-    public void mostrarDatos() {
-        System.out.println("\n--- DATOS DEL USUARIO ---");
-        System.out.println("Nombre del Usuario: " + usuario);
-        System.out.println("Nombre y Apellido: " + nombre);
-        System.out.println("DNI: " + dni);
-        System.out.println("Dirección: " + direccion);
-        System.out.println("Teléfono: " + telefono);
-        System.out.println("Email: " + email);
-        System.out.println("Estado: " + estado);
+    public String mostrarDatos() {
+        return "\n--- DATOS DEL USUARIO ---" +
+        "\nNombre del Usuario: " + usuario +
+        "\nNombre y Apellido: " + nombre +
+        "\nDNI: " + dni +
+        "\nDirección: " + direccion +
+        "\nTeléfono: " + telefono +
+        "\nEmail: " + email +
+        "\nEstado: " + estado;
     }
 
     public String mostrarPermisos() {
