@@ -140,7 +140,11 @@ public class ResumenCuentas extends javax.swing.JFrame {
         try {
             String num = NCuentaField.getText();
             Cuenta cuenta = cliente.seleccionarCuenta(num);
-            javax.swing.JOptionPane.showMessageDialog(this, cuenta.mostrarResumen(), "Detalles", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            ResumenCuenta RC = new ResumenCuenta(cuenta);
+            RC.setLocationRelativeTo(this);
+            RC.setVisible(true);
+            this.dispose();
+            
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "No se encontro esa cuenta", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
