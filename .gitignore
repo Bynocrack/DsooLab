@@ -1,5 +1,6 @@
 # Ignora las clases (Solo las ya compiladas)
 *.class
 nbproject/private/
+nbproject/build-impl.xml
 build/
 dist/
