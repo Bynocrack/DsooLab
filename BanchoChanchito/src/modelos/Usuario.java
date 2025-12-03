@@ -10,7 +10,7 @@ public  class Usuario extends Persona { // Clase Usuario hereda de Persona
     // Constructor de la clase Usuario
     public Usuario(String dni, String nombre, String direccion,
                String telefono, String email,
-               String usuario, String contraseña) {
+               String usuario, String contraseña) throws Exception{
     super(dni, nombre, direccion, telefono, email);
     this.usuario = usuario;
     this.contraseña = contraseña;

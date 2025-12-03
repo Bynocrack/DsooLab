@@ -37,6 +37,9 @@ public class MenuEmpleado extends javax.swing.JFrame {
 
         CerrarSesion = new javax.swing.JButton();
         Permisos = new javax.swing.JButton();
+        Administrar = new javax.swing.JButton();
+        Crear = new javax.swing.JButton();
+        Realizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -55,26 +58,53 @@ public class MenuEmpleado extends javax.swing.JFrame {
             }
         });
 
+        Administrar.setText("Administrar Clientes");
+        Administrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdministrarMouseClicked(evt);
+            }
+        });
+        Administrar.addActionListener(this::AdministrarActionPerformed);
+
+        Crear.setText("Crear Cuenta");
+
+        Realizar.setText("Realizar Transacciones");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(6, 139, Short.MAX_VALUE)
+                .addComponent(Crear)
+                .addGap(164, 164, 164))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(CerrarSesion))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(152, 152, 152)
-                        .addComponent(Permisos)))
-                .addContainerGap(125, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(Administrar)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addContainerGap()
+                            .addComponent(CerrarSesion))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(118, 118, 118)
+                            .addComponent(Realizar))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGap(129, 129, 129)
+                            .addComponent(Permisos))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(210, Short.MAX_VALUE)
+                .addGap(65, 65, 65)
+                .addComponent(Administrar)
+                .addGap(18, 18, 18)
+                .addComponent(Crear)
+                .addGap(18, 18, 18)
+                .addComponent(Realizar)
+                .addGap(35, 35, 35)
                 .addComponent(Permisos)
-                .addGap(38, 38, 38)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(CerrarSesion)
                 .addContainerGap())
         );
@@ -98,6 +128,18 @@ public class MenuEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
         javax.swing.JOptionPane.showMessageDialog(this, empleado.mostrarPermisos(), "Detalles", javax.swing.JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_PermisosMouseClicked
+
+    private void AdministrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministrarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdministrarActionPerformed
+
+    private void AdministrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdministrarMouseClicked
+        // TODO add your handling code here:
+        AdministrarClientes AC = new AdministrarClientes(banco, empleado);
+        AC.setLocationRelativeTo(this);
+        AC.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AdministrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -125,7 +167,10 @@ public class MenuEmpleado extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Administrar;
     private javax.swing.JButton CerrarSesion;
+    private javax.swing.JButton Crear;
     private javax.swing.JButton Permisos;
+    private javax.swing.JButton Realizar;
     // End of variables declaration//GEN-END:variables
 }

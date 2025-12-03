@@ -6,7 +6,7 @@ public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
 
     // Constructor de la clase Trabajador
     public Trabajador(String dni, String nombre, String direccion, String telefono, String email,
-                    String usuario, String contraseña) {
+                    String usuario, String contraseña) throws Exception{
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
     }
@@ -18,36 +18,6 @@ public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
 
     public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) {
         return new Retiro(cuenta, monto, cliente, this);
-    }
-
-    //Metodo para registrar nuevos clientes
-    public Cliente registrarClienteDesdeTeclado() {
-        System.out.println("\n--- REGISTRAR CLIENTE ---");
-
-        System.out.print("DNI: ");
-        String dni = sc.nextLine();
-
-        System.out.print("Nombre: ");
-        String nombre = sc.nextLine();
-
-        System.out.print("Dirección: ");
-        String direccion = sc.nextLine();
-
-        System.out.print("Teléfono: ");
-        String telefono = sc.nextLine();
-
-        System.out.print("Email: ");
-        String email = sc.nextLine();
-
-        System.out.print("Usuario: ");
-        String usuario = sc.nextLine();
-
-        System.out.println("Contraseña Usuario: ");
-        String contraseña = sc.nextLine();
-
-        //Crea y retorna el nuevo cliente creado
-        Cliente nuevo = new Cliente(dni, nombre, direccion, telefono, email, usuario, contraseña); 
-        return nuevo;
     }
 
     //Metodo para crear nuevas cuentas

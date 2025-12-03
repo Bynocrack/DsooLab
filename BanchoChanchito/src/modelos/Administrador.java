@@ -8,7 +8,7 @@ public class Administrador extends Trabajador{ // Clase Administrador hereda de 
     private Scanner sc = new Scanner(System.in);
 
     // Constructor de la clase Administrador
-    public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario, String contraseña) {
+    public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario, String contraseña) throws Exception{
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idAdministrador = "AD" + dni;

@@ -81,19 +81,17 @@ public class Banco {
     //Metodos de clientes
 
         // Método para listar los clientes
-        public void listarClientes() {
-            System.out.println("\n--- LISTA DE CLIENTES ---");
+        public ArrayList<String> listarClientes() {
+            ArrayList<String> out = new ArrayList<>();
             for (Cliente c : clientes) {
-                System.out.println(c.getIdCliente() + " - " + c.getNombre());
+                out.add(c.getIdCliente() + " - " + c.getNombre());
             }
+            return out;
         }
 
         // Método para registrar un cliente
-        public void registrarCliente(Trabajador trabajador) {
-            Cliente nuevo = trabajador.registrarClienteDesdeTeclado();
+        public void registrarCliente(Cliente nuevo) {
             clientes.add(nuevo);
-
-            System.out.println("Cliente registrado correctamente.");
         }
 
         // Método para seleccionar un cliente por ID
@@ -161,15 +159,6 @@ public class Banco {
 
         // Método para el menú del empleado
         public void menuEmpleado() {
-            System.out.println("Por favor digite su usuario");
-            String usuario = sc.nextLine();
-            Empleado empleadoLogueado = seleccionarEmpleadoPorUsuario(usuario);
-            if (empleadoLogueado == null) return;
-            
-            System.out.println("Por favor digite su contraseña");
-            String contraseña = sc.nextLine();
-            if(!(empleadoLogueado.login(usuario, contraseña))) return;
-            
             int op;
             do {
                 System.out.println("\n--- MENÚ EMPLEADO (" + empleadoLogueado.getNombre() + ") ---");
