@@ -118,29 +118,6 @@ public class Banco {
             throw new Exception("Usuario no encontrado");
         }
 
-        // Método para el menú del cliente
-        public void menuCliente() {
-            int op;
-            do {
-                System.out.println("\n--- MENÚ CLIENTE (" + clienteLogueado.getNombre() + ") ---");
-                System.out.println("1. Consultar resumen de cuentas");
-                System.out.println("2. Ver/Filtrar movimientos de una cuenta");
-                System.out.println("3. Volver al menú principal");
-                System.out.println("4. Ver permisos del cliente");
-                System.out.print("Opción: ");
-
-                op = leerInt();
-
-                switch (op) {
-                    case 1 -> mostrarResumenCuenta(clienteLogueado);
-                    case 2 -> filtrarMovimientos(clienteLogueado);
-                    case 3 -> System.out.println("Volviendo...");
-                    case 4 -> clienteLogueado.mostrarPermisos();    
-                    default -> System.out.println(" Opción inválida.");
-                }
-            } while (op != 3);
-        }
-
     // Métodos de empleados 
 
         // Método para listar los empleados
