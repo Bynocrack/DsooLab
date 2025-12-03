@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package com.bancoChanchito;
+import javax.swing.DefaultListModel;
+import java.util.ArrayList;
 import modelos.*;
 
 /**
@@ -22,8 +24,10 @@ public class ResumenCuenta extends javax.swing.JFrame {
     }
     public ResumenCuenta(Cuenta cuenta) {
         this.cuenta = cuenta;
-        Titulo.text = "Mostrando datos de la cuenta: "+cuenta.getNumero();
         initComponents();
+        Titulo.setText("Mostrando datos de la cuenta: "+cuenta.getNumero());
+        Datos.setText(cuenta.mostrarResumen());
+        mostrarTransacciones();
     }
 
     /**
@@ -59,8 +63,18 @@ public class ResumenCuenta extends javax.swing.JFrame {
         Depositos.addActionListener(this::DepositosActionPerformed);
 
         Retiros.setText("Filtrar por Retiros");
+        Retiros.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RetirosMouseClicked(evt);
+            }
+        });
 
         Todo.setText("Mostrar todo");
+        Todo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TodoMouseClicked(evt);
+            }
+        });
 
         Volver.setText("Volver");
 
@@ -117,9 +131,36 @@ public class ResumenCuenta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_DepositosActionPerformed
 
+    private void TodoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TodoMouseClicked
+        // TODO add your handling code here:
+        mostrarTransacciones();
+    }//GEN-LAST:event_TodoMouseClicked
+
+    private void RetirosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RetirosMouseClicked
+        // TODO add your handling code here:
+        DefaultListModel<String> transacciones = new DefaultListModel<>();
+        ArrayList<String> resumen = cuenta.mostrarMovimientos();
+        
+        for (int i = 0; i < resumen.size(); i++) {
+            transacciones.addElement(resumen.get(i));
+        }
+        
+        Lista.setModel(transacciones);
+    }//GEN-LAST:event_RetirosMouseClicked
+
     /**
      * @param args the command line arguments
      */
+    private void mostrarTransacciones() {
+        DefaultListModel<String> transacciones = new DefaultListModel<>();
+        ArrayList<String> resumen = cuenta.mostrarMovimientos();
+        
+        for (int i = 0; i < resumen.size(); i++) {
+            transacciones.addElement(resumen.get(i));
+        }
+        
+        Lista.setModel(transacciones);
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
