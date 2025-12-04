@@ -115,33 +115,26 @@ public class Banco {
     // Métodos de empleados 
 
         // Método para listar los empleados
-        public void listarEmpleados() {
-            System.out.println("\n--- LISTA DE EMPLEADOS ---");
+        public ArrayList<String> listarEmpleados() {
+            ArrayList<String> out = new ArrayList<>();
             for (Empleado e : empleados) {
-                System.out.println(e.getIdEmpleado() + " - " + e.getNombre());
+                out.add(e.getIdEmpleado() + " - " + e.getNombre());
             }
+            return out;
         }
 
         // Método para registrar un empleado
-        public void registrarEmpleado(Administrador administrador) {
-            Empleado nuevo = administrador.registrarEmpleadoDesdeTeclado();
+        public void registrarEmpleado(Empleado nuevo) {
             empleados.add(nuevo);
-
-            System.out.println("Empleado registrado correctamente.");
         }
 
         // Método para seleccionar un empleado por ID
-        public Empleado seleccionarEmpleadoPorID() {
-            listarEmpleados();
-            System.out.print("ID Empleado: ");
-            String id = sc.nextLine();
-
+        public Empleado seleccionarEmpleadoPorID(String id) throws Exception {
             for (Empleado e : empleados)
                 if (e.getIdEmpleado().equals(id))
                     return e;
 
-            System.out.println("No existe ese empleado.");
-            return null;
+            throw new Exception("Empleado no encontrado");
         }
 
         // Método para seleccionar un empleado por usuario
@@ -165,30 +158,8 @@ public class Banco {
         
         // Método para el menú del administrador
         public void menuAdministrador() {
-                System.out.println("5. Contratar Empleado");
-                System.out.println("6. Despedir Empleado");
-                System.out.println("7. Ver permisos del administrador");
-                System.out.println("8. Listar empleados");
                 System.out.println("9. Mostrar datos de un usuario(Administrador/Empleado/Cliente)");
-                System.out.println("0. Volver al menú principal");
-                System.out.print("Opción: ");
-
-                int op = leerInt();
-                Administrador administradorLogueado = administradores.get(0);
-
-                switch (op) {
-                    case 1 -> listarClientes();
-                    case 2 -> registrarCliente(administradorLogueado);
-                    case 3 -> crearCuentaDesdeTeclado(administradorLogueado);
-                    case 4 -> operaciones(administradorLogueado);
-                    case 5 -> registrarEmpleado(administradorLogueado);
-                    case 6 -> administradorLogueado.despedirEmpleado(this);
-                    case 7 -> administradorLogueado.mostrarPermisos();
-                    case 8 -> listarEmpleados();
-                    case 9 -> menuMostrarDatos();
-                    case 0 -> System.out.println("Volviendo...");
-                    default -> System.out.println(" Opción inválida.");
-                }
+                menuMostrarDatos();
 
         }
 
