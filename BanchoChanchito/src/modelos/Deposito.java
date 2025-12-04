@@ -16,6 +16,5 @@ public class Deposito extends Transaccion { // Clase Deposito hereda de Transacc
     // Método para procesar el depósito
     public void procesar() {
         cuenta.acreditar(monto, this);
-        System.out.println("Depósito exitoso.");
     }
 }

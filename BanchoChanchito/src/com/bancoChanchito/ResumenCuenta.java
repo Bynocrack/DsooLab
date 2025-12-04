@@ -15,6 +15,8 @@ public class ResumenCuenta extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(ResumenCuenta.class.getName());
     private Cuenta cuenta;
+    private Banco banco;
+    private Cliente cliente;
     
     /**
      * Creates new form ResumenCuenta
@@ -22,7 +24,9 @@ public class ResumenCuenta extends javax.swing.JFrame {
     public ResumenCuenta() {
         initComponents();
     }
-    public ResumenCuenta(Cuenta cuenta) {
+    public ResumenCuenta(Banco banco, Cliente cliente, Cuenta cuenta) {
+        this.banco = banco;
+        this.cliente = cliente;
         this.cuenta = cuenta;
         initComponents();
         Titulo.setText("Mostrando datos de la cuenta: "+cuenta.getNumero());
@@ -77,6 +81,11 @@ public class ResumenCuenta extends javax.swing.JFrame {
         });
 
         Volver.setText("Volver");
+        Volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VolverMouseClicked(evt);
+            }
+        });
 
         Datos.setText("jLabel1");
 
@@ -147,6 +156,14 @@ public class ResumenCuenta extends javax.swing.JFrame {
         
         Lista.setModel(transacciones);
     }//GEN-LAST:event_RetirosMouseClicked
+
+    private void VolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VolverMouseClicked
+        // TODO add your handling code here:
+        ResumenCuentas res = new ResumenCuentas(banco, cliente);
+        res.setLocationRelativeTo(this);
+        res.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_VolverMouseClicked
 
     /**
      * @param args the command line arguments

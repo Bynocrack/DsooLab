@@ -4,6 +4,7 @@
  */
 package com.bancoChanchito;
 import modelos.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,8 +39,9 @@ public class MenuEmpleado extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JButton();
         Permisos = new javax.swing.JButton();
         Administrar = new javax.swing.JButton();
-        Realizar = new javax.swing.JButton();
+        Retiro = new javax.swing.JButton();
         CrearCuenta = new javax.swing.JButton();
+        Deposito = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,10 +68,10 @@ public class MenuEmpleado extends javax.swing.JFrame {
         });
         Administrar.addActionListener(this::AdministrarActionPerformed);
 
-        Realizar.setText("Realizar Transacciones");
-        Realizar.addMouseListener(new java.awt.event.MouseAdapter() {
+        Retiro.setText("Realizar Retiro");
+        Retiro.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RealizarMouseClicked(evt);
+                RetiroMouseClicked(evt);
             }
         });
 
@@ -77,6 +79,13 @@ public class MenuEmpleado extends javax.swing.JFrame {
         CrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 CrearCuentaMouseClicked(evt);
+            }
+        });
+
+        Deposito.setText("Realizar Deposito");
+        Deposito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DepositoMouseClicked(evt);
             }
         });
 
@@ -94,14 +103,18 @@ public class MenuEmpleado extends javax.swing.JFrame {
                                 .addComponent(CerrarSesion))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(118, 118, 118)
-                                .addComponent(Realizar))
+                                .addComponent(Retiro))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(129, 129, 129)
                                 .addComponent(Permisos))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(159, 159, 159)
                         .addComponent(CrearCuenta)))
-                .addContainerGap(136, Short.MAX_VALUE))
+                .addContainerGap(144, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(Deposito)
+                .addGap(161, 161, 161))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -111,8 +124,10 @@ public class MenuEmpleado extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(CrearCuenta)
                 .addGap(18, 18, 18)
-                .addComponent(Realizar)
-                .addGap(35, 35, 35)
+                .addComponent(Retiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Deposito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Permisos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(CerrarSesion)
@@ -159,13 +174,38 @@ public class MenuEmpleado extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CrearCuentaMouseClicked
 
-    private void RealizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RealizarMouseClicked
+    private void RetiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RetiroMouseClicked
         // TODO add your handling code here:
-        CrearTransacciones CT = new CrearTransacciones(banco, empleado);
-        CT.setLocationRelativeTo(this);
-        CT.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_RealizarMouseClicked
+        try {
+            String codigoCliente = JOptionPane.showInputDialog("Codigo del cliente");
+            Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
+            String codigoCuenta = JOptionPane.showInputDialog("Codigo de la cuenta");
+            Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
+            float monto = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el monto a retirar"));
+            if (cuenta.getSaldo() < monto) {
+                throw new Exception("No hay tanto dinero en la cuenta");
+            }
+            Retiro r = empleado.registrarRetiro(cuenta, monto, cliente);
+            r.procesar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RetiroMouseClicked
+
+    private void DepositoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DepositoMouseClicked
+        // TODO add your handling code here:
+        try {
+            String codigoCliente = JOptionPane.showInputDialog("Codigo del cliente");
+            Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
+            String codigoCuenta = JOptionPane.showInputDialog("Codigo de la cuenta");
+            Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
+            float monto = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el monto a depositar"));
+            Deposito d = empleado.registrarDeposito(cuenta, monto, cliente);
+            d.procesar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DepositoMouseClicked
 
     /**
      * @param args the command line arguments
@@ -196,7 +236,8 @@ public class MenuEmpleado extends javax.swing.JFrame {
     private javax.swing.JButton Administrar;
     private javax.swing.JButton CerrarSesion;
     private javax.swing.JButton CrearCuenta;
+    private javax.swing.JButton Deposito;
     private javax.swing.JButton Permisos;
-    private javax.swing.JButton Realizar;
+    private javax.swing.JButton Retiro;
     // End of variables declaration//GEN-END:variables
 }

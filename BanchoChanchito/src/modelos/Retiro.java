@@ -18,10 +18,6 @@ public class Retiro extends Transaccion { // Clase Retiro hereda de Transaccion
     public void procesar() {
 
         //Intenta debitar el monto de la cuenta
-        if (cuenta.debitar(monto, this)) {
-            System.out.println(" Retiro exitoso.");
-        } else {
-            System.out.println(" Saldo insuficiente.");
-        }
+        cuenta.debitar(monto, this);
     }
 }

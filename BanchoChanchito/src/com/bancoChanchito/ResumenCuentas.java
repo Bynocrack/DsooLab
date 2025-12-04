@@ -140,7 +140,7 @@ public class ResumenCuentas extends javax.swing.JFrame {
         try {
             String num = NCuentaField.getText();
             Cuenta cuenta = cliente.seleccionarCuenta(num);
-            ResumenCuenta RC = new ResumenCuenta(cuenta);
+            ResumenCuenta RC = new ResumenCuenta(banco, cliente, cuenta);
             RC.setLocationRelativeTo(this);
             RC.setVisible(true);
             this.dispose();

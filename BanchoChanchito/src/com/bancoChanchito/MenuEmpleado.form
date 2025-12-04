@@ -34,7 +34,7 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="118" max="-2" attributes="0"/>
-                              <Component id="Realizar" min="-2" max="-2" attributes="0"/>
+                              <Component id="Retiro" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="129" max="-2" attributes="0"/>
@@ -47,7 +47,12 @@
                       <Component id="CrearCuenta" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="136" max="32767" attributes="0"/>
+              <EmptySpace pref="144" max="32767" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="Deposito" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="161" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -59,8 +64,10 @@
               <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
               <Component id="CrearCuenta" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Component id="Realizar" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
+              <Component id="Retiro" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="Deposito" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
               <Component id="Permisos" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="43" max="32767" attributes="0"/>
               <Component id="CerrarSesion" min="-2" max="-2" attributes="0"/>
@@ -96,12 +103,12 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AdministrarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Realizar">
+    <Component class="javax.swing.JButton" name="Retiro">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Realizar Transacciones"/>
+        <Property name="text" type="java.lang.String" value="Realizar Retiro"/>
       </Properties>
       <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RealizarMouseClicked"/>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="RetiroMouseClicked"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="CrearCuenta">
@@ -110,6 +117,14 @@
       </Properties>
       <Events>
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="CrearCuentaMouseClicked"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="Deposito">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Realizar Deposito"/>
+      </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DepositoMouseClicked"/>
       </Events>
     </Component>
   </SubComponents>
