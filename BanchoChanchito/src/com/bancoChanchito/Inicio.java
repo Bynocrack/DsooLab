@@ -20,18 +20,22 @@ public class Inicio extends javax.swing.JFrame {
      * Creates new form Inicio
      */
     public Inicio(Banco banco) {
-        this.banco = banco;
-        initComponents();
-        Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","DegoX", "Camargo");
-        Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","bmotta","CHOCA");
-        Administrador adm = new Administrador("34628123", "Atuncito", "Lima - San Isidro", "963852741", "at@gmail.com", "atun", "shh");
-        ArrayList<Cliente> cli = new ArrayList<>();
-        Cuenta cuenta = emp.crearCuenta(cli, 1);
-        cliente.agregarCuenta(cuenta);
-        banco.cuentas.add(cuenta);
-        banco.empleados.add(emp);
-        banco.clientes.add(cliente);
-        banco.administradores.add(adm);
+        try {
+            this.banco = banco;
+            initComponents();
+            Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","DegoX", "Camargo");
+            Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","bmotta","CHOCA");
+            Administrador adm = new Administrador("34628123", "Atuncito", "Lima - San Isidro", "963852741", "at@gmail.com", "atun", "shh");
+            ArrayList<Cliente> cli = new ArrayList<>();
+            Cuenta cuenta = emp.crearCuenta(cli, 1, 500);
+            cliente.agregarCuenta(cuenta);
+            banco.cuentas.add(cuenta);
+            banco.empleados.add(emp);
+            banco.clientes.add(cliente);
+            banco.administradores.add(adm);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     /**

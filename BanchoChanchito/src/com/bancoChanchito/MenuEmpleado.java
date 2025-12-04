@@ -38,8 +38,8 @@ public class MenuEmpleado extends javax.swing.JFrame {
         CerrarSesion = new javax.swing.JButton();
         Permisos = new javax.swing.JButton();
         Administrar = new javax.swing.JButton();
-        Crear = new javax.swing.JButton();
         Realizar = new javax.swing.JButton();
+        CrearCuenta = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,32 +66,42 @@ public class MenuEmpleado extends javax.swing.JFrame {
         });
         Administrar.addActionListener(this::AdministrarActionPerformed);
 
-        Crear.setText("Crear Cuenta");
-
         Realizar.setText("Realizar Transacciones");
+        Realizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RealizarMouseClicked(evt);
+            }
+        });
+
+        CrearCuenta.setText("Crear Cuenta");
+        CrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                CrearCuentaMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(6, 139, Short.MAX_VALUE)
-                .addComponent(Crear)
-                .addGap(164, 164, 164))
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(Administrar)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addContainerGap()
-                            .addComponent(CerrarSesion))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(118, 118, 118)
-                            .addComponent(Realizar))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(129, 129, 129)
-                            .addComponent(Permisos))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(Administrar)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(CerrarSesion))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(118, 118, 118)
+                                .addComponent(Realizar))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(129, 129, 129)
+                                .addComponent(Permisos))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(159, 159, 159)
+                        .addComponent(CrearCuenta)))
+                .addContainerGap(136, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -99,7 +109,7 @@ public class MenuEmpleado extends javax.swing.JFrame {
                 .addGap(65, 65, 65)
                 .addComponent(Administrar)
                 .addGap(18, 18, 18)
-                .addComponent(Crear)
+                .addComponent(CrearCuenta)
                 .addGap(18, 18, 18)
                 .addComponent(Realizar)
                 .addGap(35, 35, 35)
@@ -141,6 +151,22 @@ public class MenuEmpleado extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_AdministrarMouseClicked
 
+    private void CrearCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CrearCuentaMouseClicked
+        // TODO add your handling code here:
+        CrearCuenta CC = new CrearCuenta(banco, empleado);
+        CC.setLocationRelativeTo(this);
+        CC.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_CrearCuentaMouseClicked
+
+    private void RealizarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RealizarMouseClicked
+        // TODO add your handling code here:
+        CrearTransacciones CT = new CrearTransacciones(banco, empleado);
+        CT.setLocationRelativeTo(this);
+        CT.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_RealizarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -169,7 +195,7 @@ public class MenuEmpleado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Administrar;
     private javax.swing.JButton CerrarSesion;
-    private javax.swing.JButton Crear;
+    private javax.swing.JButton CrearCuenta;
     private javax.swing.JButton Permisos;
     private javax.swing.JButton Realizar;
     // End of variables declaration//GEN-END:variables
