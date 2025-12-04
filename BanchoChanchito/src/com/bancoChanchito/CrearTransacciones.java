@@ -117,7 +117,10 @@ public class CrearTransacciones extends javax.swing.JFrame {
             Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
             String codigoCuenta = JOptionPane.showInputDialog("Codigo del cliente");
             Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
-            float monto = Float.parseFloat("Ingrese el monto a retirar");
+            float monto = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el monto a retirar"));
+            if (cuenta.getSaldo() < monto) {
+                throw new Exception("No hay tanto dinero en la cuenta");
+            }
             if (empleado != null) {
                 empleado.registrarRetiro(cuenta, monto, cliente);
             } else if (administrador != null) {
