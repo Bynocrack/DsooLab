@@ -2,8 +2,6 @@ package modelos;
 
 import java.util.*;
 public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
-    private Scanner sc = new Scanner(System.in);
-
     // Constructor de la clase Trabajador
     public Trabajador(String dni, String nombre, String direccion, String telefono, String email,
                     String usuario, String contraseña) throws Exception{
@@ -21,19 +19,7 @@ public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
     }
 
     //Metodo para crear nuevas cuentas
-    public Cuenta crearCuenta(ArrayList<Cliente> titulares, int numero) {
-        /*System.out.print("Saldo inicial: ");
-
-        //Validar monto inicial
-        while (!sc.hasNextFloat()) {
-            sc.next();
-            System.out.print("Monto inválido: ");
-        }
-        float saldo = sc.nextFloat();
-        sc.nextLine();*/
-        
-        float saldo = 500;
-
+    public Cuenta crearCuenta(ArrayList<Cliente> titulares, int numero, float saldo) {
         String codigo = "C" + numero; //Genera el codigo de la cuenta
         Cuenta c = new Cuenta(codigo, "Ahorros", saldo, titulares); //Crea la cuenta
         return c;

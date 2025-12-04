@@ -2,6 +2,7 @@ package modelos;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class Banco {
 
@@ -95,17 +96,12 @@ public class Banco {
         }
 
         // Método para seleccionar un cliente por ID
-        public Cliente seleccionarClientePorID() {
-            listarClientes();
-            System.out.print("ID Cliente: ");
-            String id = sc.nextLine();
-
+        public Cliente seleccionarClientePorID(String id) throws Exception{
             for (Cliente c : clientes)
                 if (c.getIdCliente().equals(id))
                     return c;
 
-            System.out.println("No existe ese cliente.");
-            return null;
+            throw new Exception("No existe ese cliente");
         }
         // Método para seleccionar un cliente por usuario
         public Cliente seleccionarClientePorUsuario(String usuario) throws Exception {
@@ -242,44 +238,25 @@ public class Banco {
     // Métodos de cuentas
 
         // Método para crear una cuenta desde teclado
-        public void crearCuentaDesdeTeclado(Trabajador trabajador) {
-            ArrayList<Cliente> titulares = new ArrayList<>();
-            while (true) {
-                System.out.println("Desea crear una cuenta mancomunada? (s/n)");
-                char op = sc.nextLine().toUpperCase().charAt(0);
-                if (op == 'N') {
-                    Cliente titular = seleccionarClientePorID();
-                    if (titular == null) return;
+        public void crearCuenta(Trabajador trabajador, ArrayList<Cliente> titulares) {
+            try {
+                int numero = cuentas.size()+1;
+                float saldo = 0;
+                saldo = Float.parseFloat(JOptionPane.showInputDialog("Digite el saldo inicial"));
 
-                    titulares.add(titular);
-                    break;
-                }
-                else if (op == 'S') {
-                    while (true) {
-                        Cliente titular = seleccionarClientePorID();
-                        if (titular == null) continue;
-
-                        titulares.add(titular);
-                        System.out.println("Desea seguir ingresando titulares? (S/n)");
-                            op = sc.nextLine().toUpperCase().charAt(0);
-                        if (op == 'N') break;
+                Cuenta cuenta = trabajador.crearCuenta(titulares, numero, saldo);
+                    for (Cliente titular : titulares) {
+                        titular.agregarCuenta(cuenta);
                     }
-                    break;
-                }
+                cuentas.add(cuenta);
+                JOptionPane.showMessageDialog(null, "Cuenta creada con número: " + cuenta.getNumero(), "Hecho", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            } catch (Exception e) {
+                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-
-            int numero = cuentas.size()+1;
-
-            Cuenta cuenta = trabajador.crearCuenta(titulares, numero);
-                for (Cliente titular : titulares) {
-                    titular.agregarCuenta(cuenta);
-                }
-            cuentas.add(cuenta);
-            System.out.println("Cuenta creada con número: " + cuenta.getNumero());
         }
 
         // Método para realizar operaciones bancarias
-        public void operaciones(Trabajador trabajador) {
+        public void operaciones(Trabajador trabajador, Cliente cli, Cuenta cuenta) {
 
             Cliente cli = seleccionarClientePorID();
             if (cli == null) return;
@@ -291,19 +268,14 @@ public class Banco {
             int op;
             do {
                 System.out.println("\n--- OPERACIONES ---");
-                System.out.println("1. Consultar saldo");
                 System.out.println("2. Depósito");
                 System.out.println("3. Retiro");
-                System.out.println("4. Ver movimientos");
                 System.out.println("5. Volver");
                 System.out.print("Opción: ");
 
                 op = leerInt();
 
                 switch (op) {
-
-                    case 1 -> System.out.println("Saldo actual: S/ " + cuenta.getSaldo());
-
                     case 2 -> {
                         System.out.print("Monto depósito: ");
                         float m = leerFloat();
@@ -317,8 +289,6 @@ public class Banco {
                         Retiro r = trabajador.registrarRetiro(cuenta, m, cli);
                         r.procesar();
                     }
-
-                    case 4 -> cuenta.mostrarMovimientos();
                 }
 
             } while (op != 5);
