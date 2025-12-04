@@ -165,22 +165,6 @@ public class Banco {
         
         // Método para el menú del administrador
         public void menuAdministrador() {
-        System.out.println("Por favor digite su usuario");
-        String usuario = sc.nextLine();
-        Administrador administradorLogueado = seleccionarAdministradorPorUsuario(usuario);
-        if (administradorLogueado == null) return;
-
-        System.out.println("Por favor digite su contraseña");
-        String contraseña = sc.nextLine();
-        if(!(administradorLogueado.login(usuario, contraseña))) return;
-
-            int op;
-            do {
-                System.out.println("\n--- MENÚ ADMINISTRADOR(" + administradorLogueado.getNombre() + ") ---");
-                System.out.println("1. Listar clientes");
-                System.out.println("2. Registrar cliente");
-                System.out.println("3. Crear cuenta");
-                System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
                 System.out.println("5. Contratar Empleado");
                 System.out.println("6. Despedir Empleado");
                 System.out.println("7. Ver permisos del administrador");
@@ -189,7 +173,8 @@ public class Banco {
                 System.out.println("0. Volver al menú principal");
                 System.out.print("Opción: ");
 
-                op = leerInt();
+                int op = leerInt();
+                Administrador administradorLogueado = administradores.get(0);
 
                 switch (op) {
                     case 1 -> listarClientes();
@@ -204,7 +189,6 @@ public class Banco {
                     case 0 -> System.out.println("Volviendo...");
                     default -> System.out.println(" Opción inválida.");
                 }
-            } while (op != 0);
 
         }
 
@@ -226,73 +210,5 @@ public class Banco {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-        }
-
-        // Método para realizar operaciones bancarias
-        public void operaciones(Trabajador trabajador, Cliente cli, Cuenta cuenta) {
-
-            Cliente cli = seleccionarClientePorID();
-            if (cli == null) return;
-
-            cli.mostrarResumenCuentas();
-            Cuenta cuenta = cli.seleccionarCuenta();
-            if (cuenta == null) return;
-
-            int op;
-            do {
-                System.out.println("\n--- OPERACIONES ---");
-                System.out.println("2. Depósito");
-                System.out.println("3. Retiro");
-                System.out.println("5. Volver");
-                System.out.print("Opción: ");
-
-                op = leerInt();
-
-                switch (op) {
-                    case 2 -> {
-                        System.out.print("Monto depósito: ");
-                        float m = leerFloat();
-                        Deposito d = trabajador.registrarDeposito(cuenta, m, cli);
-                        d.procesar();
-                    }
-
-                    case 3 -> {
-                        System.out.print("Monto retiro: ");
-                        float m = leerFloat();
-                        Retiro r = trabajador.registrarRetiro(cuenta, m, cli);
-                        r.procesar();
-                    }
-                }
-
-            } while (op != 5);
-        }
-
-        // Método para filtrar movimientos de una cuenta de un cliente
-        public void filtrarMovimientos(Cliente cli) {
-            if(cli.mostrarResumenCuentas()) return;
-            Cuenta cuenta = cli.seleccionarCuenta();
-            if (cuenta == null) return;
-            cuenta.filtrarMovimientos();
-        }
-
-    //Metodos Auxiliares
-        private int leerInt() {
-            while (!sc.hasNextInt()) {
-                sc.next();
-                System.out.print("Número inválido: ");
-            }
-            int n = sc.nextInt();
-            sc.nextLine();
-            return n;
-        }
-
-        private float leerFloat() {
-            while (!sc.hasNextFloat()) {
-                sc.next();
-                System.out.print("Monto inválido: ");
-            }
-            float f = sc.nextFloat();
-            sc.nextLine();
-            return f;
         }
 }

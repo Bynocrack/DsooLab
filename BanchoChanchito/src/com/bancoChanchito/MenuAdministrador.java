@@ -4,6 +4,7 @@
  */
 package com.bancoChanchito;
 import modelos.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -38,6 +39,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
         Permisos = new javax.swing.JButton();
         CerrarSesion = new javax.swing.JButton();
         Administrar = new javax.swing.JButton();
+        Retiro = new javax.swing.JButton();
+        Deposito = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,6 +68,22 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
         });
 
+        Retiro.setText("Registrar Retiro");
+        Retiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RetiroMouseClicked(evt);
+            }
+        });
+
+        Deposito.setText("Registrar Deposito");
+        Deposito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DepositoMouseClicked(evt);
+            }
+        });
+
+        jButton1.setText("Mostrar Datos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -77,15 +97,30 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Administrar)
-                            .addComponent(Permisos))))
-                .addContainerGap(309, Short.MAX_VALUE))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addComponent(Permisos))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(246, 246, 246)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(Deposito))
+                            .addComponent(Retiro))))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(33, 33, 33)
                 .addComponent(Administrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Retiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(Deposito)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(33, 33, 33)
                 .addComponent(Permisos)
                 .addGap(38, 38, 38)
                 .addComponent(CerrarSesion)
@@ -124,6 +159,39 @@ public class MenuAdministrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_AdministrarMouseClicked
 
+    private void RetiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RetiroMouseClicked
+        // TODO add your handling code here:
+        try {
+            String codigoCliente = JOptionPane.showInputDialog("Codigo del cliente");
+            Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
+            String codigoCuenta = JOptionPane.showInputDialog("Codigo de la cuenta");
+            Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
+            float monto = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el monto a retirar"));
+            if (cuenta.getSaldo() < monto) {
+                throw new Exception("No hay tanto dinero en la cuenta");
+            }
+            Retiro r = administrador.registrarRetiro(cuenta, monto, cliente);
+            r.procesar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RetiroMouseClicked
+
+    private void DepositoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DepositoMouseClicked
+        // TODO add your handling code here:
+        try {
+            String codigoCliente = JOptionPane.showInputDialog("Codigo del cliente");
+            Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
+            String codigoCuenta = JOptionPane.showInputDialog("Codigo de la cuenta");
+            Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
+            float monto = Float.parseFloat(JOptionPane.showInputDialog("Ingrese el monto a depositar"));
+            Deposito d = administrador.registrarDeposito(cuenta, monto, cliente);
+            d.procesar();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_DepositoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -152,6 +220,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Administrar;
     private javax.swing.JButton CerrarSesion;
+    private javax.swing.JButton Deposito;
     private javax.swing.JButton Permisos;
+    private javax.swing.JButton Retiro;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
