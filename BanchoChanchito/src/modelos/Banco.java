@@ -122,6 +122,14 @@ public class Banco {
             }
             return out;
         }
+        
+        public ArrayList<String> listarAdministradores() {
+            ArrayList<String> out = new ArrayList<>();
+            for (Administrador a : administradores) {
+                out.add(a.getIdAdministrador() + " - " + a.getNombre());
+            }
+            return out;
+        }
 
         // Método para registrar un empleado
         public void registrarEmpleado(Empleado nuevo) {
