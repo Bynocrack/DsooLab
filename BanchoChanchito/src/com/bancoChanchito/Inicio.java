@@ -55,7 +55,7 @@ public class Inicio extends javax.swing.JFrame {
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        Administrador.setBackground(new java.awt.Color(0, 153, 255));
+        Administrador.setBackground(new java.awt.Color(255, 255, 0));
         Administrador.setText("Administrador");
         Administrador.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -65,7 +65,7 @@ public class Inicio extends javax.swing.JFrame {
         Administrador.addActionListener(this::AdministradorActionPerformed);
         bg.add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
 
-        Titulo.setText("SISTEMA DEL BANCO");
+        Titulo.setText("SISTEMA DEL BANCO CHANCHITO");
         bg.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 190, 20));
 
         Empleado.setBackground(new java.awt.Color(0, 153, 255));
