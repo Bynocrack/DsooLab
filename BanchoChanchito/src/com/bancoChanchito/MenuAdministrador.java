@@ -41,6 +41,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         Administrar = new javax.swing.JButton();
         Retiro = new javax.swing.JButton();
         Deposito = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -81,6 +82,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Mostrar Datos");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,7 +97,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(Administrar)
-                            .addComponent(Permisos)))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jButton1)
+                                .addComponent(Permisos))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(246, 246, 246)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,7 +118,9 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addComponent(Retiro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Deposito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 236, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 180, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(33, 33, 33)
                 .addComponent(Permisos)
                 .addGap(38, 38, 38)
                 .addComponent(CerrarSesion)
@@ -216,5 +223,6 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton Deposito;
     private javax.swing.JButton Permisos;
     private javax.swing.JButton Retiro;
+    private javax.swing.JButton jButton1;
     // End of variables declaration//GEN-END:variables
 }
