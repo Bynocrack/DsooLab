@@ -19,9 +19,9 @@ public class Inicio extends javax.swing.JFrame {
     /**
      * Creates new form Inicio
      */
-    public Inicio(Banco banco) {
+    public Inicio() {
         try {
-            this.banco = banco;
+            this.banco = new Banco();
             initComponents();
             Empleado emp = new Empleado("61761556","Diego Cahuana","Yura - Arequipa","997134305","dcauhana@banco.com","DegoX", "Camargo");
             Cliente cliente = new Cliente("60060857","Brayan Motta","Socabaya - Arequipa","945846028","brayan@gmail.com","bmotta","CHOCA");
@@ -33,6 +33,14 @@ public class Inicio extends javax.swing.JFrame {
             banco.empleados.add(emp);
             banco.clientes.add(cliente);
             banco.administradores.add(adm);
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    public Inicio(Banco banco) {
+        try {
+            this.banco = banco;
+            initComponents();
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
@@ -233,7 +241,7 @@ public class Inicio extends javax.swing.JFrame {
         Banco banco = new Banco();
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new Inicio(banco).setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Inicio().setVisible(true));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
