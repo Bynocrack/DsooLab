@@ -153,33 +153,6 @@ public class Banco {
             throw new Exception("Empleado no ecnontrado");
         }
 
-        // Método para el menú del empleado
-        public void menuEmpleado() {
-            int op;
-            do {
-                System.out.println("\n--- MENÚ EMPLEADO (" + empleadoLogueado.getNombre() + ") ---");
-                System.out.println("1. Listar clientes");
-                System.out.println("2. Registrar cliente");
-                System.out.println("3. Crear cuenta");
-                System.out.println("4. Realizar Operaciones Bancarias (Depósito/Retiro)");
-                System.out.println("5. Ver permisos del empleado");
-                System.out.println("6. Volver al menú principal");
-                System.out.print("Opción: ");
-
-                op = leerInt();
-
-                switch (op) {
-                    case 1 -> listarClientes();
-                    case 2 -> registrarCliente(empleadoLogueado);
-                    case 3 -> crearCuentaDesdeTeclado(empleadoLogueado);
-                    case 4 -> operaciones(empleadoLogueado);
-                    case 5 -> empleadoLogueado.mostrarPermisos();
-                    case 6 -> System.out.println("Volviendo...");
-                    default -> System.out.println(" Opción inválida.");
-                }
-            } while (op != 6);
-        }
-
     // Métodos de administradores
         // Método para seleccionar un administrador por usuario
         public Administrador seleccionarAdministradorPorUsuario(String usuario) throws Exception{

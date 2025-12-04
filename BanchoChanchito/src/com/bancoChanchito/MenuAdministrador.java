@@ -37,6 +37,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
 
         Permisos = new javax.swing.JButton();
         CerrarSesion = new javax.swing.JButton();
+        Administrar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,6 +57,13 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         CerrarSesion.addActionListener(this::CerrarSesionActionPerformed);
 
+        Administrar.setText("Administrar clientes");
+        Administrar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdministrarMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -66,16 +74,20 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addGap(14, 14, 14)
                         .addComponent(CerrarSesion))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(239, 239, 239)
-                        .addComponent(Permisos)))
-                .addContainerGap(302, Short.MAX_VALUE))
+                        .addGap(222, 222, 222)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(Administrar)
+                            .addComponent(Permisos))))
+                .addContainerGap(309, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addGap(33, 33, 33)
+                .addComponent(Administrar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addComponent(Permisos)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 364, Short.MAX_VALUE)
+                .addGap(38, 38, 38)
                 .addComponent(CerrarSesion)
                 .addContainerGap())
         );
@@ -104,6 +116,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_CerrarSesionMouseClicked
 
+    private void AdministrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_AdministrarMouseClicked
+        // TODO add your handling code here:
+        AdministrarClientes AC = new AdministrarClientes(banco, administrador);
+        AC.setLocationRelativeTo(this);
+        AC.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_AdministrarMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -130,6 +150,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Administrar;
     private javax.swing.JButton CerrarSesion;
     private javax.swing.JButton Permisos;
     // End of variables declaration//GEN-END:variables
