@@ -4,6 +4,7 @@
  */
 package com.bancoChanchito;
 import modelos.*;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -41,17 +42,27 @@ public class CrearTransacciones extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        Volver = new javax.swing.JButton();
+        Retiro = new javax.swing.JButton();
+        Deposito = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Volver");
+        Volver.setText("Volver");
+        Volver.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                VolverMouseClicked(evt);
+            }
+        });
 
-        jButton2.setText("Retiro");
+        Retiro.setText("Retiro");
+        Retiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RetiroMouseClicked(evt);
+            }
+        });
 
-        jButton3.setText("Deposito");
+        Deposito.setText("Deposito");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -61,12 +72,12 @@ public class CrearTransacciones extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jButton1))
+                        .addComponent(Volver))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(jButton2)
+                        .addComponent(Retiro)
                         .addGap(67, 67, 67)
-                        .addComponent(jButton3)))
+                        .addComponent(Deposito)))
                 .addContainerGap(94, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -74,15 +85,48 @@ public class CrearTransacciones extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(Retiro)
+                    .addComponent(Deposito))
                 .addGap(118, 118, 118)
-                .addComponent(jButton1)
+                .addComponent(Volver)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VolverMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VolverMouseClicked
+        // TODO add your handling code here:
+        if (empleado != null) {
+            MenuEmpleado ME = new MenuEmpleado(banco, empleado);
+            ME.setLocationRelativeTo(this);
+            ME.setVisible(true);
+            this.dispose();
+        } else if (administrador != null) {
+            MenuAdministrador MA = new MenuAdministrador(banco, administrador);
+            MA.setLocationRelativeTo(this);
+            MA.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_VolverMouseClicked
+
+    private void RetiroMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RetiroMouseClicked
+        // TODO add your handling code here:
+        try {
+            String codigoCliente = JOptionPane.showInputDialog("Codigo del cliente");
+            Cliente cliente = banco.seleccionarClientePorID(codigoCliente);
+            String codigoCuenta = JOptionPane.showInputDialog("Codigo del cliente");
+            Cuenta cuenta = cliente.seleccionarCuenta(codigoCuenta);
+            float monto = Float.parseFloat("Ingrese el monto a retirar");
+            if (empleado != null) {
+                empleado.registrarRetiro(cuenta, monto, cliente);
+            } else if (administrador != null) {
+                administrador.registrarRetiro(cuenta, monto, cliente);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_RetiroMouseClicked
 
     /**
      * @param args the command line arguments
@@ -110,8 +154,8 @@ public class CrearTransacciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton Deposito;
+    private javax.swing.JButton Retiro;
+    private javax.swing.JButton Volver;
     // End of variables declaration//GEN-END:variables
 }
