@@ -41,7 +41,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         AdministrarClientes = new javax.swing.JButton();
         Retiro = new javax.swing.JButton();
         Deposito = new javax.swing.JButton();
-        MostrarDatos = new javax.swing.JButton();
+        ResumenUsuarios = new javax.swing.JButton();
         AdministrarEmpleados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -83,7 +83,12 @@ public class MenuAdministrador extends javax.swing.JFrame {
             }
         });
 
-        MostrarDatos.setText("Mostrar Datos");
+        ResumenUsuarios.setText("Resumen Usuarios");
+        ResumenUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResumenUsuariosMouseClicked(evt);
+            }
+        });
 
         AdministrarEmpleados.setText("Administrar empleados");
         AdministrarEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,7 +109,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(222, 222, 222)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(MostrarDatos)
+                            .addComponent(ResumenUsuarios)
                             .addComponent(Permisos)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(236, 236, 236)
@@ -132,7 +137,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(AdministrarEmpleados)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addComponent(MostrarDatos)
+                .addComponent(ResumenUsuarios)
                 .addGap(33, 33, 33)
                 .addComponent(Permisos)
                 .addGap(38, 38, 38)
@@ -213,6 +218,14 @@ public class MenuAdministrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_AdministrarEmpleadosMouseClicked
 
+    private void ResumenUsuariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ResumenUsuariosMouseClicked
+        // TODO add your handling code here:
+        ResumenUsuarios RU = new ResumenUsuarios(banco, administrador);
+        RU.setLocationRelativeTo(this);
+        RU.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_ResumenUsuariosMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -243,8 +256,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton AdministrarEmpleados;
     private javax.swing.JButton CerrarSesion;
     private javax.swing.JButton Deposito;
-    private javax.swing.JButton MostrarDatos;
     private javax.swing.JButton Permisos;
+    private javax.swing.JButton ResumenUsuarios;
     private javax.swing.JButton Retiro;
     // End of variables declaration//GEN-END:variables
 }

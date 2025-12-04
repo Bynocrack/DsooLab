@@ -32,7 +32,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="222" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="MostrarDatos" min="-2" max="-2" attributes="0"/>
+                          <Component id="ResumenUsuarios" min="-2" max="-2" attributes="0"/>
                           <Component id="Permisos" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -70,7 +70,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="AdministrarEmpleados" min="-2" max="-2" attributes="0"/>
               <EmptySpace pref="151" max="32767" attributes="0"/>
-              <Component id="MostrarDatos" min="-2" max="-2" attributes="0"/>
+              <Component id="ResumenUsuarios" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="33" max="-2" attributes="0"/>
               <Component id="Permisos" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
@@ -123,10 +123,13 @@
         <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="DepositoMouseClicked"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="MostrarDatos">
+    <Component class="javax.swing.JButton" name="ResumenUsuarios">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Mostrar Datos"/>
+        <Property name="text" type="java.lang.String" value="Resumen Usuarios"/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="ResumenUsuariosMouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="AdministrarEmpleados">
       <Properties>
