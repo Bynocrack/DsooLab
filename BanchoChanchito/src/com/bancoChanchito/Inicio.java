@@ -44,16 +44,54 @@ public class Inicio extends javax.swing.JFrame {
     private void initComponents() {
 
         bg = new javax.swing.JPanel();
-        Administrador = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         Titulo = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        Instrucciones = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        Administrador = new javax.swing.JButton();
         Empleado = new javax.swing.JButton();
         Cliente = new javax.swing.JButton();
-        Instrucciones = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         bg.setBackground(new java.awt.Color(255, 255, 255));
         bg.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel1.setForeground(new java.awt.Color(255, 153, 51));
+
+        Titulo.setFont(new java.awt.Font("SansSerif", 3, 45)); // NOI18N
+        Titulo.setForeground(new java.awt.Color(255, 255, 255));
+        Titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Titulo.setText("SISTEMA DEL BANCO CHANCHITO");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, 788, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addComponent(Titulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(33, 33, 33))
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 100));
+
+        jPanel2.setBackground(new java.awt.Color(227, 224, 224));
+
+        Instrucciones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Instrucciones.setText("SELECCIONE EL TIPO DE USUARIO");
+
+        jLabel1.setText("CON EL QUE DESEA INGRESAR");
 
         Administrador.setBackground(new java.awt.Color(255, 255, 0));
         Administrador.setText("Administrador");
@@ -63,10 +101,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Administrador.addActionListener(this::AdministradorActionPerformed);
-        bg.add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 130, -1, -1));
-
-        Titulo.setText("SISTEMA DEL BANCO CHANCHITO");
-        bg.add(Titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 40, 190, 20));
 
         Empleado.setBackground(new java.awt.Color(0, 153, 255));
         Empleado.setText("Empleado");
@@ -76,7 +110,6 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Empleado.addActionListener(this::EmpleadoActionPerformed);
-        bg.add(Empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 210, -1, -1));
 
         Cliente.setBackground(new java.awt.Color(0, 153, 255));
         Cliente.setText("Cliente");
@@ -86,10 +119,49 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Cliente.addActionListener(this::ClienteActionPerformed);
-        bg.add(Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 330, -1, -1));
 
-        Instrucciones.setText("SELECCIONE EL TIPO DE USUARIO CON EL QUE DESEA INGRESAR");
-        bg.add(Instrucciones, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, -1, -1));
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(Instrucciones, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(58, 58, 58)
+                        .addComponent(jLabel1)))
+                .addContainerGap(33, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(Administrador)
+                        .addGap(78, 78, 78))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Cliente)
+                            .addComponent(Empleado))
+                        .addGap(90, 90, 90))))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(Instrucciones)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(Administrador)
+                .addGap(31, 31, 31)
+                .addComponent(Empleado)
+                .addGap(32, 32, 32)
+                .addComponent(Cliente)
+                .addContainerGap(146, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 270, 350));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -99,19 +171,15 @@ public class Inicio extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void LoginAdministrador(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginAdministrador
+    private void EmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpleadoActionPerformed
         // TODO add your handling code here:
-        Login login = new Login(banco, "A");
-        login.setLocationRelativeTo(this);
-        login.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_LoginAdministrador
+    }//GEN-LAST:event_EmpleadoActionPerformed
 
     private void LoginEmpleado(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginEmpleado
         // TODO add your handling code here:
@@ -121,6 +189,22 @@ public class Inicio extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_LoginEmpleado
 
+    private void AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministradorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_AdministradorActionPerformed
+
+    private void LoginAdministrador(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginAdministrador
+        // TODO add your handling code here:
+        Login login = new Login(banco, "A");
+        login.setLocationRelativeTo(this);
+        login.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_LoginAdministrador
+
+    private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ClienteActionPerformed
+
     private void LoginCliente(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_LoginCliente
         // TODO add your handling code here:
         Login login = new Login(banco, "C");
@@ -128,18 +212,6 @@ public class Inicio extends javax.swing.JFrame {
         login.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_LoginCliente
-
-    private void ClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ClienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_ClienteActionPerformed
-
-    private void AdministradorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdministradorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_AdministradorActionPerformed
-
-    private void EmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EmpleadoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_EmpleadoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,5 +246,8 @@ public class Inicio extends javax.swing.JFrame {
     private javax.swing.JLabel Instrucciones;
     private javax.swing.JLabel Titulo;
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
