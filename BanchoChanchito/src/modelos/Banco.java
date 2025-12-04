@@ -228,53 +228,6 @@ public class Banco {
             }
         }
 
-        // Método para realizar operaciones bancarias
-        public void operaciones(Trabajador trabajador, Cliente cli, Cuenta cuenta) {
-
-            Cliente cli = seleccionarClientePorID();
-            if (cli == null) return;
-
-            cli.mostrarResumenCuentas();
-            Cuenta cuenta = cli.seleccionarCuenta();
-            if (cuenta == null) return;
-
-            int op;
-            do {
-                System.out.println("\n--- OPERACIONES ---");
-                System.out.println("2. Depósito");
-                System.out.println("3. Retiro");
-                System.out.println("5. Volver");
-                System.out.print("Opción: ");
-
-                op = leerInt();
-
-                switch (op) {
-                    case 2 -> {
-                        System.out.print("Monto depósito: ");
-                        float m = leerFloat();
-                        Deposito d = trabajador.registrarDeposito(cuenta, m, cli);
-                        d.procesar();
-                    }
-
-                    case 3 -> {
-                        System.out.print("Monto retiro: ");
-                        float m = leerFloat();
-                        Retiro r = trabajador.registrarRetiro(cuenta, m, cli);
-                        r.procesar();
-                    }
-                }
-
-            } while (op != 5);
-        }
-
-        // Método para filtrar movimientos de una cuenta de un cliente
-        public void filtrarMovimientos(Cliente cli) {
-            if(cli.mostrarResumenCuentas()) return;
-            Cuenta cuenta = cli.seleccionarCuenta();
-            if (cuenta == null) return;
-            cuenta.filtrarMovimientos();
-        }
-
     //Metodos Auxiliares
         private int leerInt() {
             while (!sc.hasNextInt()) {
