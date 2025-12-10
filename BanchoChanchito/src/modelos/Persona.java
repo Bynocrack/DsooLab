@@ -1,10 +1,6 @@
 package modelos;
 
-import java.util.Scanner;
-
 public class Persona {
-    private Scanner sc = new Scanner(System.in);
-
     // Atributos básicos
     protected String dni;
     protected String nombre;
