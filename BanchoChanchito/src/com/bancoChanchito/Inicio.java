@@ -148,7 +148,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Administrador.addActionListener(this::AdministradorActionPerformed);
-        bg.add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 160, 250, 70));
+        bg.add(Administrador, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 160, 250, 70));
 
         Empleado.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         Empleado.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_empleado_1.png"))); // NOI18N
@@ -159,7 +159,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Empleado.addActionListener(this::EmpleadoActionPerformed);
-        bg.add(Empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 250, 250, 70));
+        bg.add(Empleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 250, 250, 70));
 
         Cliente.setFont(new java.awt.Font("Tahoma", 0, 24)); // NOI18N
         Cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/Logo_cliente_1.png"))); // NOI18N
@@ -170,7 +170,7 @@ public class Inicio extends javax.swing.JFrame {
             }
         });
         Cliente.addActionListener(this::ClienteActionPerformed);
-        bg.add(Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 340, 250, 70));
+        bg.add(Cliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 340, 250, 70));
 
         Instrucciones.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         Instrucciones.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -188,7 +188,7 @@ public class Inicio extends javax.swing.JFrame {
         jLabel7.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(153, 153, 153));
         jLabel7.setText("© 2025 Banco Chanchito. Todos los derechos reservados.");
-        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 450, -1, -1));
+        bg.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 450, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
