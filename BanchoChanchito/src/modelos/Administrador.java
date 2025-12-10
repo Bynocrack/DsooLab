@@ -20,6 +20,7 @@ public class Administrador extends Trabajador{ // Clase Administrador hereda de 
     }
 
     // Método getter 
+    @Override
     public String getIdAdministrador() { return idAdministrador; }
 
     @Override

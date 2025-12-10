@@ -10,11 +10,11 @@ public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
     }
 
     //Metodo para registrar depositos y retiros
-    public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) {
+    public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) throws Exception{
         return new Deposito(cuenta, monto, cliente, this);
     }
 
-    public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) {
+    public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) throws Exception{
         return new Retiro(cuenta, monto, cliente, this);
     }
 
@@ -24,4 +24,6 @@ public class Trabajador extends Usuario { // Clase Trabajador hereda de Usuario
         Cuenta c = new Cuenta(codigo, "Ahorros", saldo, titulares); //Crea la cuenta
         return c;
     }
+    public String getIdEmpleado() throws Exception{ throw new Exception("?"); }
+    public String getIdAdministrador() throws Exception{ throw new Exception("?"); }
 }

@@ -11,14 +11,14 @@ public class AutoServicio {
     }
 
     // Método para registrar un depósito sin empleado
-    public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) {
+    public Deposito registrarDeposito(Cuenta cuenta, float monto, Cliente cliente) throws Exception{
         Deposito d = new Deposito(cuenta, monto, cliente, null);
         d.procesar();
         return d;
     }
 
     // Método para registrar un retiro sin empleado
-    public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) {
+    public Retiro registrarRetiro(Cuenta cuenta, float monto, Cliente cliente) throws Exception{
         Retiro r = new Retiro(cuenta, monto, cliente, null);
         r.procesar();
         return r;
