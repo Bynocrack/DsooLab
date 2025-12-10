@@ -53,6 +53,10 @@ public class Cuenta {
         return false;
     }
     
+    public void cargarMovimiento(Transaccion t) {
+        movimientos.add(t);
+    }
+    
     // Método para listar los movimientos de la cuenta
     public ArrayList<Transaccion> listarMovimientos() {
         return movimientos;

@@ -23,13 +23,6 @@ public class Inicio extends javax.swing.JFrame {
         try {
             this.banco = new Banco();
             initComponents();
-            //ArrayList<Cliente> cli = new ArrayList<>();
-            //Cuenta cuenta = emp.crearCuenta(cli, 1, 500);
-            //cliente.agregarCuenta(cuenta);
-            //banco.cuentas.add(cuenta);
-            //banco.empleados.add(emp);
-            //banco.clientes.add(cliente);
-            //banco.administradores.add(adm);
             banco.cargarDatos();
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);

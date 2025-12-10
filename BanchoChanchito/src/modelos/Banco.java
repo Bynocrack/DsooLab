@@ -70,7 +70,36 @@ public class Banco {
                 for (Cliente titular : titulares) {
                     titular.agregarCuenta(c);
                 }
-            } 
+            }
+            rs.close();
+            pstmt.close();
+            pstmt = DB.prepareStatement("SELECT * FROM transacciones");
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Cliente cli;
+                Trabajador emp;
+                Cuenta cue;
+                try {
+                        cli = seleccionarClientePorID(rs.getString("idCliente"));
+                        if (rs.getBoolean("empleado")) {
+                            emp = seleccionarEmpleadoPorID(rs.getString("idEncargado"));
+                        } else {
+                            emp = seleccionarAdministradorPorID(rs.getString("idEncargado"));
+                        }
+                        cue = seleccionarCuentaPorID(rs.getString("idCuenta"));
+                } catch (Exception e) {
+                    throw new Exception("Error al cargar los datos de la transaccion: " + rs.getString("idTransaccion"));
+                }
+                if (rs.getString("idTransaccion").charAt(0) == 'R') {
+                    Retiro r = new Retiro(rs.getString("idTransaccion"), rs.getString("fechaHora"),
+                        rs.getFloat("monto"), rs.getBoolean("empleado"), emp, cue, cli, null);
+                    cue.cargarMovimiento(r);
+                } else {
+                    Deposito d = new Deposito(rs.getString("idTransaccion"), rs.getString("fechaHora"),
+                        rs.getFloat("monto"), rs.getBoolean("empleado"), emp, cue, cli, null);
+                    cue.cargarMovimiento(d);
+                }
+            }
         } catch (Exception e) {
             throw e;
         }
@@ -227,6 +256,14 @@ public class Banco {
             throw new Exception("Administrador no encontrado");
         }
         
+        public Administrador seleccionarAdministradorPorID(String id) throws Exception {
+            for (Administrador a : administradores)
+                if (a.getIdAdministrador().equals(id))
+                    return a;
+
+            throw new Exception("Administrador no encontrado");
+        }
+        
         // Método para el menú del administrador
         public void menuAdministrador() {
                 System.out.println("9. Mostrar datos de un usuario(Administrador/Empleado/Cliente)");
@@ -252,5 +289,13 @@ public class Banco {
             } catch (Exception e) {
                 JOptionPane.showMessageDialog(null, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
+        }
+        
+        public Cuenta seleccionarCuentaPorID(String id) throws Exception {
+            for (Cuenta c : cuentas)
+                if (c.getNumero().equals(id))
+                    return c;
+
+            throw new Exception("Cuenta no encontrada");
         }
 }

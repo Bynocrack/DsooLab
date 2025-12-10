@@ -1,7 +1,8 @@
 package modelos;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Transaccion {
 
@@ -10,21 +11,52 @@ public class Transaccion {
     protected String fechaHora;
     protected float monto;
     protected boolean atendidoPorEmpleado;
-    protected Usuario encargado;
+    protected Trabajador encargado;
     protected Cuenta cuenta;
     protected Cliente cliente;
     protected AutoServicio canal;
 
-    // Constructor por defecto
-    public Transaccion() {
-        DateTimeFormatter plantilla = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss.SSS");
-        this.fechaHora = LocalDateTime.now().format(plantilla);
-    }
-
     // Constructor de la clase Transaccion
     public Transaccion(String id, String fechaHora, float monto,
-                       boolean atendidoPorEmpleado, Usuario encargado,
-                       Cuenta cuenta, Cliente cliente, AutoServicio canal) {
+                       boolean atendidoPorEmpleado, Trabajador encargado,
+                       Cuenta cuenta, Cliente cliente, AutoServicio canal, boolean creado) throws Exception{
+
+        this.id = id;
+        this.fechaHora = fechaHora;
+        this.monto = monto;
+        this.atendidoPorEmpleado = atendidoPorEmpleado;
+        this.encargado = encargado;
+        this.cuenta = cuenta;
+        this.cliente = cliente;
+        this.canal = canal;
+        
+        try (Connection DB = ConexionDB.conectar();
+            PreparedStatement pstmt = DB.prepareStatement(
+                    "INSERT INTO transacciones (idTransaccion, fechaHora, monto, empleado, idEncargado, idCuenta, idCliente, canal) VALUES(?,?,?,?,?,?,?,?)"
+            )){
+            pstmt.setString(1, this.id);
+            pstmt.setString(2, this.fechaHora);
+            pstmt.setFloat(3, this.monto);
+            if (encargado instanceof Empleado) {
+                pstmt.setInt(4, 1);
+                pstmt.setString(5, this.encargado.getIdEmpleado());
+            } else {
+                pstmt.setInt(4, 0);
+                pstmt.setString(5, this.encargado.getIdAdministrador());
+            }
+            pstmt.setString(6, this.cuenta.getNumero());
+            pstmt.setString(7, this.cliente.getIdCliente());
+            pstmt.setString(8, null);
+            int filas = pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println(e.getMessage() + "ASDASD");
+            throw new Exception("Error al subir la transaccion a la base de datos,\n no se efectuaron los cambios");
+        }
+    }
+    
+    public Transaccion(String id, String fechaHora, float monto,
+                       boolean atendidoPorEmpleado, Trabajador encargado,
+                       Cuenta cuenta, Cliente cliente, AutoServicio canal){
 
         this.id = id;
         this.fechaHora = fechaHora;

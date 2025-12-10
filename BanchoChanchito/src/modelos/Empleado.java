@@ -20,10 +20,11 @@ public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajado
     }
 
     // Método getter
+    @Override
     public String getIdEmpleado() { return idEmpleado; }
 
-    @Override
     // Método para mostrar los permisos del empleado
+    @Override
     public String mostrarPermisos() {
         return "================================" +
         "\n PERMISOS DEL EMPLEADO: " +
