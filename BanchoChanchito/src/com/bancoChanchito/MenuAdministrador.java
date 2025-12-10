@@ -73,6 +73,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 RetiroMouseClicked(evt);
             }
         });
+        Retiro.addActionListener(this::RetiroActionPerformed);
 
         Deposito.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Deposito.setText("Registrar Deposito");
@@ -158,23 +159,22 @@ public class MenuAdministrador extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(AdministrarEmpleados))
+                        .addGap(41, 41, 41)
+                        .addComponent(Retiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Deposito))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(26, 26, 26)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(Permisos)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(AdministrarClientes)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(ResumenUsuarios))
-                                    .addComponent(Retiro)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(236, 236, 236)
-                                .addComponent(Deposito)))))
-                .addGap(0, 21, Short.MAX_VALUE))
+                        .addComponent(AdministrarClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResumenUsuarios)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(AdministrarEmpleados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Permisos)
+                        .addGap(0, 28, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,22 +186,19 @@ public class MenuAdministrador extends javax.swing.JFrame {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(AdministrarClientes))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(45, 45, 45)
-                                .addComponent(ResumenUsuarios)))
-                        .addGap(11, 11, 11)
-                        .addComponent(Retiro)
-                        .addGap(5, 5, 5)
-                        .addComponent(Deposito)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addComponent(AdministrarEmpleados)
-                        .addGap(29, 29, 29)
-                        .addComponent(Permisos)
-                        .addGap(49, 49, 49))))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AdministrarClientes)
+                            .addComponent(ResumenUsuarios))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Retiro)
+                            .addComponent(Deposito))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AdministrarEmpleados)
+                            .addComponent(Permisos))
+                        .addGap(49, 179, Short.MAX_VALUE))))
         );
 
         pack();
@@ -284,6 +281,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         RU.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_ResumenUsuariosMouseClicked
+
+    private void RetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RetiroActionPerformed
 
     /**
      * @param args the command line arguments
