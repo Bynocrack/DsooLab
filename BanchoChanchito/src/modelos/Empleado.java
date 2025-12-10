@@ -12,6 +12,12 @@ public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajado
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idEmpleado = "EM" + dni;
     }
+    public Empleado(String dni, String nombre, String direccion, String telefono, String email,
+                    String usuario, String contraseña, String idEmpleado) throws Exception{
+
+        super(dni, nombre, direccion, telefono, email, usuario, contraseña);
+        this.idEmpleado = idEmpleado;
+    }
 
     // Método getter
     public String getIdEmpleado() { return idEmpleado; }

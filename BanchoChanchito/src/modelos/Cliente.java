@@ -1,14 +1,13 @@
 package modelos;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
 
     // Atributos de la clase Cliente
     private String idCliente;
     private ArrayList<Cuenta> cuentas;
-    private Scanner sc = new Scanner(System.in);
+    private String[] codCuentas;
 
     // Constructor de la clase Cliente
     public Cliente(String dni, String nombre, String direccion,
@@ -16,6 +15,14 @@ public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idCliente = "CL" + dni;
+        this.cuentas = new ArrayList<>();
+    }
+    public Cliente(String dni, String nombre, String direccion,
+                   String telefono, String email, String usuario, String contraseña,
+                   String idCliente) throws Exception{
+
+        super(dni, nombre, direccion, telefono, email, usuario, contraseña);
+        this.idCliente = idCliente;
         this.cuentas = new ArrayList<>();
     }
 

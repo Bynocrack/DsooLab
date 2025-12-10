@@ -1,6 +1,5 @@
 package modelos;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Cuenta {
 
@@ -10,14 +9,13 @@ public class Cuenta {
     private float saldo;
     private ArrayList<Transaccion> movimientos;
     private ArrayList<Cliente> titulares;
-    private Scanner sc = new Scanner(System.in);
 
     // Constructor de la clase Cuenta.
     public Cuenta(String numero, String tipo, float saldoInicial, ArrayList<Cliente> titulares) {
         this.numero = numero;
         this.tipo = tipo;
         this.saldo = redondear(saldoInicial);
-        this.titulares = (titulares != null) ? titulares : new ArrayList<>();
+        this.titulares = titulares;
         this.movimientos = new ArrayList<>();
     }
     
