@@ -62,6 +62,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
         jLabel8.setText("© 2025 Banco Chanchito. Todos los derechos reservados.");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel2.setBackground(new java.awt.Color(255, 153, 51));
 
