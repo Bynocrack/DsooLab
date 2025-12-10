@@ -37,15 +37,19 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private void initComponents() {
 
         Permisos = new javax.swing.JButton();
-        CerrarSesion = new javax.swing.JButton();
         AdministrarClientes = new javax.swing.JButton();
         Retiro = new javax.swing.JButton();
         Deposito = new javax.swing.JButton();
         ResumenUsuarios = new javax.swing.JButton();
         AdministrarEmpleados = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        CerrarSesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        Permisos.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
         Permisos.setText("Mostrar Permisos");
         Permisos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -54,6 +58,73 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         Permisos.addActionListener(this::PermisosActionPerformed);
 
+        AdministrarClientes.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        AdministrarClientes.setText("Administrar clientes");
+        AdministrarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdministrarClientesMouseClicked(evt);
+            }
+        });
+
+        Retiro.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Retiro.setText("Registrar Retiro");
+        Retiro.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                RetiroMouseClicked(evt);
+            }
+        });
+        Retiro.addActionListener(this::RetiroActionPerformed);
+
+        Deposito.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        Deposito.setText("Registrar Deposito");
+        Deposito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DepositoMouseClicked(evt);
+            }
+        });
+
+        ResumenUsuarios.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        ResumenUsuarios.setText("Resumen Usuarios");
+        ResumenUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                ResumenUsuariosMouseClicked(evt);
+            }
+        });
+
+        AdministrarEmpleados.setFont(new java.awt.Font("SansSerif", 1, 18)); // NOI18N
+        AdministrarEmpleados.setText("Administrar empleados");
+        AdministrarEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                AdministrarEmpleadosMouseClicked(evt);
+            }
+        });
+
+        jPanel1.setBackground(new java.awt.Color(255, 153, 0));
+
+        jLabel1.setFont(new java.awt.Font("SansSerif", 3, 45)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("MENU ADMINISTRADOR");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(58, 58, 58)
+                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addContainerGap(17, Short.MAX_VALUE))
+        );
+
+        jPanel2.setBackground(new java.awt.Color(0, 0, 0));
+
+        CerrarSesion.setFont(new java.awt.Font("SansSerif", 1, 14)); // NOI18N
         CerrarSesion.setText("Cerrar Sesion");
         CerrarSesion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -62,87 +133,72 @@ public class MenuAdministrador extends javax.swing.JFrame {
         });
         CerrarSesion.addActionListener(this::CerrarSesionActionPerformed);
 
-        AdministrarClientes.setText("Administrar clientes");
-        AdministrarClientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AdministrarClientesMouseClicked(evt);
-            }
-        });
-
-        Retiro.setText("Registrar Retiro");
-        Retiro.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                RetiroMouseClicked(evt);
-            }
-        });
-
-        Deposito.setText("Registrar Deposito");
-        Deposito.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                DepositoMouseClicked(evt);
-            }
-        });
-
-        ResumenUsuarios.setText("Resumen Usuarios");
-        ResumenUsuarios.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ResumenUsuariosMouseClicked(evt);
-            }
-        });
-
-        AdministrarEmpleados.setText("Administrar empleados");
-        AdministrarEmpleados.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                AdministrarEmpleadosMouseClicked(evt);
-            }
-        });
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(CerrarSesion)
+                .addGap(29, 29, 29))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(CerrarSesion)
+                .addGap(16, 16, 16))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(CerrarSesion))
+                        .addGap(41, 41, 41)
+                        .addComponent(Retiro)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Deposito))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(222, 222, 222)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(ResumenUsuarios)
-                            .addComponent(Permisos)))
+                        .addGap(26, 26, 26)
+                        .addComponent(AdministrarClientes)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(ResumenUsuarios)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(236, 236, 236)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(AdministrarClientes)
-                            .addComponent(Deposito)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(228, 228, 228)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(AdministrarEmpleados)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(Retiro)
-                                .addGap(24, 24, 24)))))
-                .addContainerGap(283, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(AdministrarEmpleados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(Permisos)
+                        .addGap(0, 28, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addComponent(AdministrarClientes)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Retiro)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(Deposito)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(AdministrarEmpleados)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
-                .addComponent(ResumenUsuarios)
-                .addGap(33, 33, 33)
-                .addComponent(Permisos)
-                .addGap(38, 38, 38)
-                .addComponent(CerrarSesion)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AdministrarClientes)
+                            .addComponent(ResumenUsuarios))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(Retiro)
+                            .addComponent(Deposito))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(AdministrarEmpleados)
+                            .addComponent(Permisos))
+                        .addGap(49, 179, Short.MAX_VALUE))))
         );
 
         pack();
@@ -226,6 +282,10 @@ public class MenuAdministrador extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_ResumenUsuariosMouseClicked
 
+    private void RetiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RetiroActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_RetiroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -259,5 +319,8 @@ public class MenuAdministrador extends javax.swing.JFrame {
     private javax.swing.JButton Permisos;
     private javax.swing.JButton ResumenUsuarios;
     private javax.swing.JButton Retiro;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
     // End of variables declaration//GEN-END:variables
 }
