@@ -1,12 +1,13 @@
 package modelos;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class Transaccion {
 
     // Atributos de la clase Transaccion
     protected String id;
-    protected LocalDateTime fechaHora;
+    protected String fechaHora;
     protected float monto;
     protected boolean atendidoPorEmpleado;
     protected Usuario encargado;
@@ -16,11 +17,12 @@ public class Transaccion {
 
     // Constructor por defecto
     public Transaccion() {
-        this.fechaHora = LocalDateTime.now();
+        DateTimeFormatter plantilla = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH:mm:ss.SSS");
+        this.fechaHora = LocalDateTime.now().format(plantilla);
     }
 
     // Constructor de la clase Transaccion
-    public Transaccion(String id, LocalDateTime fechaHora, float monto,
+    public Transaccion(String id, String fechaHora, float monto,
                        boolean atendidoPorEmpleado, Usuario encargado,
                        Cuenta cuenta, Cliente cliente, AutoServicio canal) {
 
@@ -36,7 +38,7 @@ public class Transaccion {
 
     // Métodos getters
     public String getId() { return id; }
-    public LocalDateTime getFechaHora() { return fechaHora; }
+    public String getFechaHora() { return fechaHora; }
     public float getMonto() { return monto; }
     public boolean getAtendidoPorEmpleado() { return atendidoPorEmpleado; }
     public Usuario getEncargado() { return encargado; }

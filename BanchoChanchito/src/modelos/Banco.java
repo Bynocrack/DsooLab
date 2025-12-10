@@ -3,6 +3,9 @@ package modelos;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 public class Banco {
 
@@ -12,6 +15,66 @@ public class Banco {
     public ArrayList<Administrador> administradores = new ArrayList<>();
     public ArrayList<Cuenta> cuentas = new ArrayList<>();
     private Scanner sc = new Scanner(System.in);
+
+    public void cargarDatos() throws Exception{
+        try (Connection DB = new ConexionDB().conectar()) {
+            PreparedStatement pstmt = DB.prepareStatement("SELECT * FROM clientes");
+            ResultSet rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Cliente c = new Cliente(rs.getString("dni"), rs.getString("nombre"),
+                        rs.getString("direccion"), rs.getString("telefono"),
+                        rs.getString("email"), rs.getString("usuario"), rs.getString("contrasena"),
+                        rs.getString("idCliente"));
+                clientes.add(c);
+            }
+            rs.close();
+            pstmt.close();
+            pstmt = DB.prepareStatement("SELECT * FROM empleados");
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Empleado e = new Empleado(rs.getString("dni"), rs.getString("nombre"),
+                        rs.getString("direccion"), rs.getString("telefono"),
+                        rs.getString("email"), rs.getString("usuario"), rs.getString("contrasena"),
+                        rs.getString("idEmpleado"));
+                empleados.add(e);
+            }
+            rs.close();
+            pstmt.close();
+            pstmt = DB.prepareStatement("SELECT * FROM administradores");
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                Administrador a = new Administrador(rs.getString("dni"), rs.getString("nombre"),
+                        rs.getString("direccion"), rs.getString("telefono"),
+                        rs.getString("email"), rs.getString("usuario"), rs.getString("contrasena"),
+                        rs.getString("idAdministrador"));
+                administradores.add(a);
+            }
+            rs.close();
+            pstmt.close();
+            pstmt = DB.prepareStatement("SELECT * FROM cuentas");
+            rs = pstmt.executeQuery();
+            while(rs.next()) {
+                String[] duenos = rs.getString("titulares").split(",");
+                ArrayList<Cliente> titulares = new ArrayList<>();
+                for (String dueno : duenos) {
+                    try {
+                        Cliente titular = seleccionarClientePorID(dueno);
+                        titulares.add(titular);
+                    } catch (Exception e) {
+                        throw new Exception("Error al cargar el titular: " + dueno);
+                    }
+                }
+                Cuenta c = new Cuenta(rs.getString("numero"), rs.getString("tipo"),
+                        rs.getFloat("saldo"), titulares);
+                cuentas.add(c);
+                for (Cliente titular : titulares) {
+                    titular.agregarCuenta(c);
+                }
+            } 
+        } catch (Exception e) {
+            throw e;
+        }
+    }
 
     // Método para mostrar los datos de un usuario (Administrador/Empleado/Cliente)
     public void menuMostrarDatos() {

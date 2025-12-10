@@ -14,7 +14,7 @@ public  class Usuario extends Persona { // Clase Usuario hereda de Persona
     super(dni, nombre, direccion, telefono, email);
     this.usuario = usuario;
     this.contraseña = contraseña;
-    this.estado = "INACTIVO"; 
+    this.estado = "ACTIVO"; 
     }
 
     // Métodos getters

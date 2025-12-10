@@ -1,17 +1,22 @@
 package modelos;
 
-import java.util.*;
 public class Administrador extends Trabajador{ // Clase Administrador hereda de Trabajador
 
     // Atributos de la clase Administrador
     private String idAdministrador;
-    private Scanner sc = new Scanner(System.in);
 
     // Constructor de la clase Administrador
-    public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario, String contraseña) throws Exception{
-
+    public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario,
+            String contraseña) throws Exception{
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idAdministrador = "AD" + dni;
+    }
+    
+    public Administrador(String dni, String nombre, String direccion, String telefono, String email, String usuario,
+            String contraseña, String idAdministrador) throws Exception{
+
+        super(dni, nombre, direccion, telefono, email, usuario, contraseña);
+        this.idAdministrador = idAdministrador;
     }
 
     // Método getter 
