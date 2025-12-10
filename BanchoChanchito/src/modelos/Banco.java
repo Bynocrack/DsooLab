@@ -65,7 +65,7 @@ public class Banco {
                     }
                 }
                 Cuenta c = new Cuenta(rs.getString("numero"), rs.getString("tipo"),
-                        rs.getFloat("saldo"), titulares);
+                        rs.getFloat("saldo"), titulares, true);
                 cuentas.add(c);
                 for (Cliente titular : titulares) {
                     titular.agregarCuenta(c);

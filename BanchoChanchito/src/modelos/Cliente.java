@@ -1,5 +1,7 @@
 package modelos;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 
 public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
@@ -16,6 +18,32 @@ public class Cliente extends Usuario { // Clase Cliente hereda de Usuario
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idCliente = "CL" + dni;
         this.cuentas = new ArrayList<>();
+        
+        try (Connection DB = ConexionDB.conectar();
+            PreparedStatement pstmt = DB.prepareStatement(
+                    "INSERT INTO clientes (idCliente, dni, nombre, direccion, cuentas, telefono, email, usuario, contrasena, estado) VALUES(?,?,?,?,?,?,?,?,?,?)"
+            )){
+            pstmt.setString(1, this.idCliente);
+            pstmt.setString(2, this.dni);
+            pstmt.setString(3, this.nombre);
+            pstmt.setString(4, this.direccion);
+            String codCuentas = "";
+            for (int i = 0; i < cuentas.size(); i++) {
+                codCuentas += cuentas.get(i).getNumero();
+                if (i != cuentas.size()-1) {
+                    codCuentas += ",";
+                }
+            }
+            pstmt.setString(5, codCuentas);
+            pstmt.setString(6, this.telefono);
+            pstmt.setString(7, this.email);
+            pstmt.setString(8, this.usuario);
+            pstmt.setString(9, this.contraseña);
+            pstmt.setInt(10, 0);
+            int filas = pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception("Error al subir el cliente a la base de datos,\n no se efectuaron los cambios");
+        }
     }
     public Cliente(String dni, String nombre, String direccion,
                    String telefono, String email, String usuario, String contraseña,
