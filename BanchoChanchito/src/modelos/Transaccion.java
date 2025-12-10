@@ -2,7 +2,6 @@ package modelos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 public class Transaccion {
 
@@ -49,7 +48,6 @@ public class Transaccion {
             pstmt.setString(8, null);
             int filas = pstmt.executeUpdate();
         } catch (Exception e) {
-            System.out.println(e.getMessage() + "ASDASD");
             throw new Exception("Error al subir la transaccion a la base de datos,\n no se efectuaron los cambios");
         }
     }

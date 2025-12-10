@@ -1,5 +1,7 @@
 package modelos;
 import java.util.ArrayList;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 
 public class Cuenta {
 
@@ -11,7 +13,35 @@ public class Cuenta {
     private ArrayList<Cliente> titulares;
 
     // Constructor de la clase Cuenta.
-    public Cuenta(String numero, String tipo, float saldoInicial, ArrayList<Cliente> titulares) {
+    public Cuenta(String numero, String tipo, float saldoInicial, ArrayList<Cliente> titulares) throws Exception{
+        this.numero = numero;
+        this.tipo = tipo;
+        this.saldo = redondear(saldoInicial);
+        this.titulares = titulares;
+        this.movimientos = new ArrayList<>();
+        
+        try (Connection DB = ConexionDB.conectar();
+            PreparedStatement pstmt = DB.prepareStatement(
+                    "INSERT INTO cuentas (numero, tipo, saldo, titulares) VALUES(?,?,?,?)"
+            )){
+            pstmt.setString(1, this.numero);
+            pstmt.setString(2, this.tipo);
+            pstmt.setFloat(3, this.saldo);
+            String codTitulares = "";
+            for (int i = 0; i < titulares.size(); i++) {
+                codTitulares += titulares.get(i).getIdCliente();
+                if (i != titulares.size()-1) {
+                    codTitulares += ",";
+                }
+            }
+            pstmt.setString(4, codTitulares);
+            int filas = pstmt.executeUpdate();
+        } catch (Exception e) {
+            throw new Exception("Error al subir la cuenta a la base de datos,\n no se efectuaron los cambios");
+        }
+    }
+    
+    public Cuenta(String numero, String tipo, float saldoInicial, ArrayList<Cliente> titulares, boolean existente) {
         this.numero = numero;
         this.tipo = tipo;
         this.saldo = redondear(saldoInicial);
@@ -40,6 +70,7 @@ public class Cuenta {
     // Método para acreditar un monto en la cuenta
     public void acreditar(float monto, Transaccion t) {
         saldo = redondear(saldo + monto);
+        actualizar();
         movimientos.add(t);
     }
 
@@ -47,10 +78,24 @@ public class Cuenta {
     public boolean debitar(float monto, Transaccion t) {
         if (saldo >= monto) {
             saldo = redondear(saldo - monto);
+            actualizar();
             movimientos.add(t);
             return true;
         }
         return false;
+    }
+    
+    public void actualizar() {
+        try (Connection DB = ConexionDB.conectar();
+             PreparedStatement pstmt = DB.prepareStatement(
+                     "UPDATE cuentas SET saldo = ? WHERE numero = ?"
+             )){
+            pstmt.setFloat(1, this.saldo);
+            pstmt.setString(2, this.numero);
+            pstmt.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
     }
     
     public void cargarMovimiento(Transaccion t) {
