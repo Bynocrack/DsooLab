@@ -267,7 +267,7 @@ public class AdministrarClientes extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            System.out.println("Algo salio mal y nadie sabe que es");
         }
         //</editor-fold>
 

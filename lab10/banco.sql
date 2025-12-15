@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 10-12-2025 a las 21:10:07
+-- Tiempo de generación: 15-12-2025 a las 01:58:00
 -- Versión del servidor: 8.4.7
 -- Versión de PHP: 8.3.28
 
@@ -20,6 +20,8 @@ SET time_zone = "+00:00";
 --
 -- Base de datos: `banco`
 --
+CREATE DATABASE IF NOT EXISTS `banco` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE `banco`;
 
 -- --------------------------------------------------------
 
@@ -98,14 +100,14 @@ CREATE TABLE IF NOT EXISTS `cuentas` (
   `saldo` float NOT NULL,
   `titulares` text COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`numero`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Volcado de datos para la tabla `cuentas`
 --
 
 INSERT INTO `cuentas` (`numero`, `tipo`, `saldo`, `titulares`) VALUES
-('C1', 'Ahorros', 1000, 'CL60060857');
+('C1', 'Ahorros', 6000, 'CL60060857');
 
 -- --------------------------------------------------------
 
@@ -155,8 +157,28 @@ CREATE TABLE IF NOT EXISTS `transacciones` (
   `idCliente` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `canal` varchar(4) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   PRIMARY KEY (`idTransaccion`),
-  UNIQUE KEY `fechaHora` (`fechaHora`)
+  UNIQUE KEY `fechaHora` (`fechaHora`),
+  KEY `idCuenta` (`idCuenta`),
+  KEY `idCliente` (`idCliente`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `transacciones`
+--
+
+INSERT INTO `transacciones` (`idTransaccion`, `fechaHora`, `monto`, `empleado`, `idEncargado`, `idCuenta`, `idCliente`, `canal`) VALUES
+('D-2025-12-14-20:34:38.308', '2025-12-14-20:34:38.310', 5000, 0, 'AD34628123', 'C1', 'CL60060857', NULL);
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `transacciones`
+--
+ALTER TABLE `transacciones`
+  ADD CONSTRAINT `transacciones_ibfk_1` FOREIGN KEY (`idCuenta`) REFERENCES `cuentas` (`numero`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transacciones_ibfk_2` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

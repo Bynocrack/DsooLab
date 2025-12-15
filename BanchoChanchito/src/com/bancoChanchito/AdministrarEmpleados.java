@@ -263,7 +263,9 @@ public class AdministrarEmpleados extends javax.swing.JFrame {
         try {
             String id = JOptionPane.showInputDialog("Digite el ID del emplado");
             Empleado empleado = banco.seleccionarEmpleadoPorID(id);
+            empleado.despedido();
             banco.empleados.remove(empleado);
+            cargarEmpleados();
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
@@ -303,7 +305,7 @@ public class AdministrarEmpleados extends javax.swing.JFrame {
                 }
             }
         } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
+            System.out.println("Algo pasoxd");
         }
         //</editor-fold>
 
