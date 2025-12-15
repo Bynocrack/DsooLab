@@ -2,6 +2,7 @@ package modelos;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 
 public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajador
 
@@ -28,7 +29,7 @@ public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajado
             pstmt.setString(7, this.usuario);
             pstmt.setString(8, this.contraseña);
             pstmt.setInt(9, 0);
-            int filas = pstmt.executeUpdate();
+            pstmt.executeUpdate();
         } catch (Exception e) {
             throw new Exception("Error al subir el empleado a la base de datos,\n no se efectuaron los cambios");
         }
@@ -38,6 +39,18 @@ public class Empleado extends Trabajador { // Clase Empleado hereda de Trabajado
 
         super(dni, nombre, direccion, telefono, email, usuario, contraseña);
         this.idEmpleado = idEmpleado;
+    }
+    
+    public void despedido() throws Exception{
+        try (Connection DB = ConexionDB.conectar();
+            PreparedStatement pstmt = DB.prepareStatement(
+                    "DELETE FROM empleados WHERE idEmpleado = ?"
+            )){
+            pstmt.setString(1, this.idEmpleado);
+            pstmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new Exception("Error al despedir empelado de la base de datos,\nNo se efectuaron los cambios.");
+        }
     }
 
     // Método getter
